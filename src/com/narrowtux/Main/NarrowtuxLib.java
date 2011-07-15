@@ -8,10 +8,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.event.Listener;
@@ -20,11 +24,16 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.FileUtil;
 
+import com.narrowtux.Notification.Notification;
+import com.narrowtux.Notification.NotificationManager;
+import com.narrowtux.Notification.SimpleNotificationManager;
 import com.narrowtux.event.PlayerListener;
 
 public class NarrowtuxLib extends JavaPlugin {
 	private static Logger log = Bukkit.getServer().getLogger();
 	private PlayerListener playerListener = new PlayerListener();
+	private SimpleNotificationManager notificationManager = new SimpleNotificationManager();
+	private static NarrowtuxLib instance;
 
 	@Override
 	public void onDisable() {
@@ -40,11 +49,16 @@ public class NarrowtuxLib extends JavaPlugin {
             }
         }
         catch (Exception e) {}
+        save();
 		sendDescription("disabled");
 	}
 
+
 	@Override
 	public void onEnable() {
+		instance = this;
+		createDataFolder();
+		load();
 		(new Thread() {
             public void run() {
                 update();
@@ -54,9 +68,27 @@ public class NarrowtuxLib extends JavaPlugin {
 		sendDescription("enabled");
 	}
 
+	private void load() {
+		//Load Notifications
+		notificationManager.load();
+	}
+	
+	private void save() {
+		//Save Notifications
+		notificationManager.save();
+	}
+
+	private void createDataFolder() {
+		File folder = getDataFolder();
+		if(!folder.exists()){
+			folder.mkdir();
+		}
+	}
+
 	private void registerEvents() {
 		registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Lowest);
 		registerEvent(Type.PLAYER_MOVE, playerListener);
+		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
 	}
 
 	private void registerEvent(Type type, Listener listener, Priority priority){
@@ -136,5 +168,77 @@ public class NarrowtuxLib extends JavaPlugin {
         }
         catch (Exception e) {}
     }
+	
+	public static NotificationManager getNotificationManager(){
+		return instance.notificationManager;
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String args[]){
+		/*
+		 * Commands:
+		 *  nt add Player Title Text
+		 */
+		if(cmd.getName().equals("notification")){
+			if(args.length>=1){
+				if(args[0].equals("add")){
+					if(args.length==4){
+						String player = args[1];
+						String title = args[2];
+						String text = args[3];
+						Notification n = new Notification(player, title, text);
+						n.print();
+						sender.sendMessage("Added notification for "+player);
+						return true;
+					}
+				}
+				if(sender instanceof Player){
+					if(args.length==1){
+						Player p = (Player)sender;
+						int id = 0;
+						try{
+							id = Integer.valueOf(args[0]);
+						} catch(Exception e){
+							id = 0;
+						}
+						Notification n = notificationManager.get(id);
+						if(n == null)
+						{
+							p.sendMessage("This notification does not exist!");
+							return true;
+						}
+						if(n.getReceiver().toLowerCase().equals(p.getName().toLowerCase())){
+							n.print();
+						} else {
+							p.sendMessage("You may not see this notification!");
+						}
+						return true;
+					}
+				}
+			}
+			if(args.length==0){
+				if(sender instanceof Player){
+					Player p = (Player)sender;
+					List<Notification> pending = notificationManager.getPendingNotifications(p);
+					if(pending.size()>0){
+						p.sendMessage("Unread Notifications:");
+						p.sendMessage("---------------------");
+						for(Notification n:pending){
+							p.sendMessage(n.getId()+": "+n.getTitle());
+						}
+						p.sendMessage("Type /nt [number] to view the notification.");
+					} else {
+						p.sendMessage("No new notifications.");
+					}
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	public static NarrowtuxLib getInstance() {
+		return instance;
+	}
 
 }
