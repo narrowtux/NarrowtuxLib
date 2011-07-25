@@ -14,6 +14,13 @@ import org.bukkit.Server;
 import org.bukkit.World;
 
 public class FileUtils {
+	
+	/**
+	 * Reads the contents of a file
+	 * @param file the file to read
+	 * @return the content of the file
+	 * @throws FileNotFoundException when the file wasn't found
+	 */
 	public static String getContents(File file) throws FileNotFoundException{
 		if(file.exists()){
 			FileInputStream input;
@@ -40,6 +47,11 @@ public class FileUtils {
 		}
 	}
 	
+	/**
+	 * Sets the content of a file
+	 * @param file the file to write
+	 * @param content the content to write into the given file
+	 */
 	public static void setContents(File file, String content){
 		try {
 			FileOutputStream output = new FileOutputStream(file.getAbsoluteFile());
@@ -51,6 +63,15 @@ public class FileUtils {
 		}
 	}
 	
+	/**
+	 * Converts a Location-Object into a string.
+	 * @code
+	 * worldname,x,y,z
+	 * @endcode
+	 * @param loc
+	 * @return the converted string
+	 * @see locationFromString
+	 */
 	public static String locationToString(Location loc){
 		if(loc==null)
 		{
@@ -62,6 +83,12 @@ public class FileUtils {
 		return ret;
 	}
 	
+	/**
+	 * Converts a string back to a location
+	 * @param string the string in this format: @code worldname,x,y,z @endcode
+	 * @param server the server to get a world object
+	 * @return the converted Location object
+	 */
 	public static Location locationFromString(String string, Server server){
 		if(string.equals("(null)")){
 			return null;

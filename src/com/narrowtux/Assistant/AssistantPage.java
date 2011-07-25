@@ -37,6 +37,13 @@ public class AssistantPage {
 		return assistant;
 	}
 	
+	/**
+	 * Will be called when this is the current page and the player types something in chat
+	 * Override this method to provide your own handling.
+	 * @param text the text the player typed into chat
+	 * @return the Action
+	 * @see AssistantAction
+	 */
 	public AssistantAction onPageInput(String text){
 		assistant.sendMessage(assistant.formatLine(ChatColor.YELLOW+"You: "+ChatColor.WHITE+text));
 		return AssistantAction.CONTINUE;
@@ -57,6 +64,9 @@ public class AssistantPage {
 	/*
 	 * Page actions
 	 */
+	/**
+	 * Shows the title and text of the page. Will be called whenever this has become the current page.
+	 */
 	public void play(){
 		String message = "";
 		if(!getTitle().equals("")){
@@ -73,6 +83,11 @@ public class AssistantPage {
 		assistant.sendMessage(message);
 	}
 	
+	/**
+	 * Sends a message to the player.
+	 * Multiple lines will be sent seperately.
+	 * @param text the text to send.
+	 */
 	public void sendMessage(String text){
 		getAssistant().sendMessage(text);
 	}

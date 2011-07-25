@@ -8,17 +8,35 @@ import org.bukkit.ChatColor;
 
 import com.narrowtux.Utils.FlatFileReader;
 
+/**
+ * Translation provides a basic localisation. The files have to have the following format:
+ * @code key=value
+ * @endcode
+ * A translation version can be stored like this:
+ * @code version=1
+ * @endcode
+ * @see getVersion
+ * @author tux
+ *
+ */
 public class Translation {
 	private Map<String, String> translations = new HashMap<String, String>();
 	private File file;
 	private int version;
 	
+	/**
+	 * Loads the translation again from the given file
+	 * @param file the file to load.
+	 */
 	public void reload(File file){
 		this.file = file;
 		translations.clear();
 		load();
 	}
 	
+	/**
+	 * Reloads the translation from the stored file
+	 */
 	public void reload(){
 		translations.clear();
 		load();
@@ -36,6 +54,12 @@ public class Translation {
 		version = reader.getInteger("version", 0);
 	}
 	
+	/**
+	 * Translates the given key to the loaded language
+	 * @param key the translation key
+	 * @param args arguments for the translation.
+	 * @return the translation
+	 */
 	public String tr(String key, Object... args){
 		if(!translations.containsKey(key)){
 			return "Can't find key "+key+" for translation!";
@@ -49,6 +73,11 @@ public class Translation {
 		}
 	}
 	
+	/**
+	 * Translates the given key to the loaded language
+	 * @param key the translation key
+	 * @return the translation
+	 */
 	public String tr(String key){
 		if(!translations.containsKey(key)){
 			return "Can't find key "+key+" for translation!";
@@ -58,6 +87,12 @@ public class Translation {
 		}
 	}
 	
+	/**
+	 * Converts [COLOR] into ChatColor from the given text
+	 * @param str the string to convert
+	 * @return the converted string
+	 * @author Afforess
+	 */
 	public static String parseColors(String str) {
 		//Method written by Afforess
 		for (ChatColor color : ChatColor.values()) {
@@ -67,6 +102,9 @@ public class Translation {
 		return str;
 	}
 	
+	/**
+	 * @return the version of the translation.
+	 */
 	public int getVersion(){
 		return version;
 	}

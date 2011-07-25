@@ -69,7 +69,7 @@ public class SimpleNotificationManager implements NotificationManager {
 	public void clear(String player) {
 		for(Notification n:notifications.values()){
 			if(n.getReceiver().equals(player)){
-				notifications.remove(n);
+				notifications.remove(n.getId());
 			}
 		}
 	}

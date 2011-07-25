@@ -12,7 +12,10 @@ public class TextPage extends AssistantPage {
 		input=text;
 		return AssistantAction.CONTINUE;
 	}
-	
+	/**
+	 * Get the input of the page after it has been processed.
+	 * @return the text that the player typed in.
+	 */
 	public String getInput(){
 		return input;
 	}

@@ -21,10 +21,20 @@ public class Assistant {
 	private Location assistantStartLocation = null;
 	private static Map<Player, Assistant> instances = new HashMap<Player, Assistant>();
 	
+	/**
+	 * Creates an assistant.
+	 * @param p is the Player that summoned the assistant.
+	 */
 	public Assistant(Player p){
 		setPlayer(p);
 	}
 	
+	/**
+	 * Called when players chat to forward the chat input to the current page.
+	 * If the player has an assistant, the event is cancelled
+	 * @param event 
+	 * @returns false when the assistant was cancelled
+	 */
 	public static boolean onPlayerChat(PlayerChatEvent event){
 		//Dispatch the chat to the right assistant
 		Assistant current = null;
@@ -108,14 +118,14 @@ public class Assistant {
 	}
 
 	/**
-	 * @param currentPage the currentPage to set
+	 * @param currentPage the current page to set
 	 */
 	public void setCurrentPage(AssistantPage currentPage) {
 		this.currentPage = currentPage;
 	}
 
 	/**
-	 * @return the currentPage
+	 * @return the current page
 	 */
 	public AssistantPage getCurrentPage() {
 		return currentPage;
@@ -142,6 +152,10 @@ public class Assistant {
 		return pages;
 	}
 	
+	/**
+	 * Adds a page to the end of the assistant
+	 * @param page the page to add
+	 */
 	public void addPage(AssistantPage page){
 		pages.add(page);
 		page.setAssistant(this);
@@ -154,10 +168,18 @@ public class Assistant {
 	 * Assistant events
 	 */
 	
+	/**
+	 * Will be called when the assistant was cancelled
+	 * Override this method to provide your own message
+	 */
 	public void onAssistantCancel(){
 		getPlayer().sendMessage(ChatColor.YELLOW+"Assistant cancelled.");
 	}
 	
+	/**
+	 * Will be called when the assistant was finished. 
+	 * Normally, this means that the user has completed the last page
+	 */
 	public void onAssistantFinish(){
 		//TODO: some default implementation here.
 	}
@@ -166,6 +188,9 @@ public class Assistant {
 	 * Assistant actions
 	 */
 	
+	/**
+	 * Starts the assistant.
+	 */
 	public void start(){
 		instances.put(getPlayer(),this);
 		String message = getSeparator()+"\n";
@@ -175,12 +200,21 @@ public class Assistant {
 		currentPage.play();
 	}
 	
+	/**
+	 * Cancels the assistant. onAssistantCancel() will be called
+	 * @see onAssistantCancel 
+	 */
 	public void cancel(){
 		onAssistantCancel();
 		sendMessage(getSeparator());
 		remove();
 	}
 	
+	
+	/**
+	 * Stops the assistant. onAssistantFinish() will be called
+	 * @see onAssistantFinish 
+	 */
 	public void stop(){
 		onAssistantFinish();
 		sendMessage(getSeparator());
@@ -198,21 +232,35 @@ public class Assistant {
 	 * Misc actions
 	 */
 	
+	/**
+	 * Sends a message to the player
+	 * Multilines will be sent seperately
+	 */
 	public void sendMessage(String text){
 		for(String line:text.split("\n")){
 			getPlayer().sendMessage(line);
 		}
 	}
 	
+	/**
+	 * @returns the seperator
+	 */
 	public String getSeparator(){
 		return ChatColor.LIGHT_PURPLE+"|---------------------------------------------------|";
 	}
 	
+	/**
+	 * Use this to format one line
+	 * @param line the line to format
+	 * @returns the formatted line
+	 */
 	public String formatLine(String line){
 		return ChatColor.LIGHT_PURPLE+"| "+ChatColor.WHITE+line;
 	}
 
 	/**
+	 * When you set a start location, the assistant will be cancelled when the player goes
+	 * 5 meters away from this location
 	 * @param assistantStartLocation the assistantStartLocation to set
 	 */
 	public void setAssistantStartLocation(Location assistantStartLocation) {
@@ -226,6 +274,12 @@ public class Assistant {
 		return assistantStartLocation;
 	}
 	
+	/**
+	 * Repeats the current page. 
+	 * @deprecated please return AssistantAction.REPEAT in AssistantPage.onPageInput instead
+	 * @see AssistantAction
+	 */
+	@Deprecated
 	public void repeatCurrentPage(){
 		pages.add(currentPageIndex+1, getCurrentPage());
 	}

@@ -6,7 +6,7 @@ public enum AssistantAction {
 	 */
 	CANCEL,
 	/**
-	 * finishs the assistant
+	 * finishes the assistant
 	 */
 	FINISH,
 	/**

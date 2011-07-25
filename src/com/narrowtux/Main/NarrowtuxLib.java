@@ -27,11 +27,15 @@ import org.bukkit.util.FileUtil;
 import com.narrowtux.Notification.Notification;
 import com.narrowtux.Notification.NotificationManager;
 import com.narrowtux.Notification.SimpleNotificationManager;
-import com.narrowtux.event.PlayerListener;
+import com.narrowtux.Utils.NetworkUtils;
+import com.narrowtux.event.NTLPlayerListener;
+import com.narrowtux.event.NTLServerListener;
+import com.nijikokun.register.payment.Method;
 
 public class NarrowtuxLib extends JavaPlugin {
 	private static Logger log = Bukkit.getServer().getLogger();
-	private PlayerListener playerListener = new PlayerListener();
+	private NTLPlayerListener playerListener = new NTLPlayerListener();
+	private NTLServerListener serverListener = new NTLServerListener();
 	private SimpleNotificationManager notificationManager = new SimpleNotificationManager();
 	private static NarrowtuxLib instance;
 
@@ -53,11 +57,20 @@ public class NarrowtuxLib extends JavaPlugin {
 		sendDescription("disabled");
 	}
 
-
 	@Override
 	public void onEnable() {
 		instance = this;
 		createDataFolder();
+		final PluginManager pm = getServer().getPluginManager();
+	    if (pm.getPlugin("BukkitContrib") == null){
+	        try {
+	            NetworkUtils.download(log, new URL("http://bit.ly/autoupdateBukkitContrib"), new File("plugins/BukkitContrib.jar"));
+	            pm.loadPlugin(new File("plugins" + File.separator + "BukkitContrib.jar"));
+	            pm.enablePlugin(pm.getPlugin("BukkitContrib"));
+	        } catch (final Exception ex) {
+	            log.warning("[NarrowtuxLib] Failed to install BukkitContrib, you may have to restart your server or install it manually.");
+	        }
+	    }
 		load();
 		(new Thread() {
             public void run() {
@@ -89,6 +102,8 @@ public class NarrowtuxLib extends JavaPlugin {
 		registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Lowest);
 		registerEvent(Type.PLAYER_MOVE, playerListener);
 		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
+		registerEvent(Type.PLUGIN_ENABLE, serverListener, Priority.Monitor);
+		registerEvent(Type.PLUGIN_DISABLE, serverListener, Priority.Monitor);
 	}
 
 	private void registerEvent(Type type, Listener listener, Priority priority){
@@ -100,7 +115,7 @@ public class NarrowtuxLib extends JavaPlugin {
 		registerEvent(type, listener, Priority.Normal);
 	}
 
-	public void sendDescription(String startup){
+	private void sendDescription(String startup){
 		PluginDescriptionFile pdf = getDescription();
 		String authors = "";
 		for(String name: pdf.getAuthors()){
@@ -111,7 +126,9 @@ public class NarrowtuxLib extends JavaPlugin {
 		}
 		log.log(Level.INFO, "["+pdf.getName()+"] v"+pdf.getVersion()+" by ["+authors+"] "+startup+".");
 	}
-
+	/**
+	 * @return the logger
+	 */
 	public static Logger getLogger(){
 		return log;
 	}
@@ -137,6 +154,9 @@ public class NarrowtuxLib extends JavaPlugin {
 		return false;
 	}
 
+	/**
+	 * @return the version as int
+	 */
 	public int getVersion() {
 		try {
 			String[] split = this.getDescription().getVersion().split("\\.");
@@ -168,7 +188,10 @@ public class NarrowtuxLib extends JavaPlugin {
         }
         catch (Exception e) {}
     }
-	
+	/**
+	 * 
+	 * @return the notification manager
+	 */
 	public static NotificationManager getNotificationManager(){
 		return instance.notificationManager;
 	}
@@ -180,7 +203,7 @@ public class NarrowtuxLib extends JavaPlugin {
 		 */
 		if(cmd.getName().equals("notification")){
 			if(args.length>=1){
-				if(args[0].equals("add")){
+				if(args[0].equals("add")&&sender.isOp()){
 					if(args.length==4){
 						String player = args[1];
 						String title = args[2];
@@ -236,9 +259,20 @@ public class NarrowtuxLib extends JavaPlugin {
 		return false;
 	}
 
-
+	/**
+	 * 
+	 * @return the plugin instance
+	 */
 	public static NarrowtuxLib getInstance() {
 		return instance;
 	}
-
+	
+	public static Method getMethod(){
+		Method ret = getInstance().serverListener.getMethod();
+		if(ret==null)
+		{
+			getLogger().warning("No Payment method found! Plugins that rely on this might not work! (And you might see an exception stack trace below this).");
+		}
+		return ret;
+	}
 }
