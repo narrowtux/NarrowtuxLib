@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class Assistant {
 	private List<AssistantPage> pages = new ArrayList<AssistantPage>();
@@ -20,6 +21,8 @@ public class Assistant {
 	private String heldBackChat = "";
 	private Location assistantStartLocation = null;
 	private static Map<Player, Assistant> instances = new HashMap<Player, Assistant>();
+	private AssistantScreen screen = null;
+	private boolean active;
 	
 	/**
 	 * Creates an assistant.
@@ -192,11 +195,17 @@ public class Assistant {
 	 * Starts the assistant.
 	 */
 	public void start(){
+		active = true;
 		instances.put(getPlayer(),this);
-		String message = getSeparator()+"\n";
-		message += formatLine(getTitle())+"\n";
-		message += getSeparator();
-		sendMessage(message);
+		if(useGUI()){
+			screen = createAssistantScreen();
+			getSpoutPlayer().getMainScreen().attachPopupScreen(screen);
+		} else {
+			String message = getSeparator()+"\n";
+			message += formatLine(getTitle())+"\n";
+			message += getSeparator();
+			sendMessage(message);
+		}
 		currentPage.play();
 	}
 	
@@ -205,6 +214,7 @@ public class Assistant {
 	 * @see onAssistantCancel 
 	 */
 	public void cancel(){
+		closeScreen();
 		onAssistantCancel();
 		sendMessage(getSeparator());
 		remove();
@@ -216,9 +226,18 @@ public class Assistant {
 	 * @see onAssistantFinish 
 	 */
 	public void stop(){
+		closeScreen();
 		onAssistantFinish();
 		sendMessage(getSeparator());
 		remove();
+	}
+	
+	private void closeScreen(){
+		active = false;
+		if(useGUI()){
+			screen.close();
+			screen = null;
+		}
 	}
 	
 	private void remove(){
@@ -227,6 +246,7 @@ public class Assistant {
 			sendMessage(ChatColor.YELLOW+"This is the chat held back for you:");
 			sendMessage(heldBackChat);
 		}
+		
 	}
 	/*
 	 * Misc actions
@@ -237,8 +257,16 @@ public class Assistant {
 	 * Multilines will be sent seperately
 	 */
 	public void sendMessage(String text){
-		for(String line:text.split("\n")){
-			getPlayer().sendMessage(line);
+		if(useGUI()){
+			MessageBox msg = new MessageBox("Message", text, Icon.INFORMATION, getSpoutPlayer());
+			if(screen!=null)
+				screen.attachMessageBox(msg);
+			else 
+				getSpoutPlayer().getMainScreen().attachPopupScreen(msg);
+		} else {
+			for(String line:text.split("\n")){
+				getPlayer().sendMessage(line);
+			}
 		}
 	}
 	
@@ -282,5 +310,38 @@ public class Assistant {
 	@Deprecated
 	public void repeatCurrentPage(){
 		pages.add(currentPageIndex+1, getCurrentPage());
+	}
+	
+	public SpoutPlayer getSpoutPlayer(){
+		return (SpoutPlayer)player;
+	}
+	
+	public boolean useGUI(){
+		SpoutPlayer player = (SpoutPlayer)this.player;
+		return player.getVersion()>=18;
+	}
+	
+	public AssistantScreen getScreen(){
+		return screen;
+	}
+	
+	public boolean isActive(){
+		return active;
+	}
+	
+	public void sendMessage(Icon icon, String title, String text){
+		if(useGUI()){
+			MessageBox msg = new MessageBox(title, text, icon, getSpoutPlayer());
+			if(screen!=null)
+				screen.attachMessageBox(msg);
+			else
+				getSpoutPlayer().getMainScreen().attachPopupScreen(msg);
+		} else {
+			sendMessage(icon.getMessage()+" "+ChatColor.WHITE+title+"\n"+ChatColor.WHITE+text);
+		}
+	}
+	
+	public AssistantScreen createAssistantScreen(){
+		return new AssistantScreen(this);
 	}
 }

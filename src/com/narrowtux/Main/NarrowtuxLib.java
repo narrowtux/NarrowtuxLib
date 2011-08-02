@@ -30,6 +30,7 @@ import com.narrowtux.Notification.SimpleNotificationManager;
 import com.narrowtux.Utils.NetworkUtils;
 import com.narrowtux.event.NTLPlayerListener;
 import com.narrowtux.event.NTLServerListener;
+import com.narrowtux.event.NTScreenListener;
 import com.nijikokun.register.payment.Method;
 
 public class NarrowtuxLib extends JavaPlugin {
@@ -62,14 +63,15 @@ public class NarrowtuxLib extends JavaPlugin {
 		instance = this;
 		createDataFolder();
 		final PluginManager pm = getServer().getPluginManager();
-	    if (pm.getPlugin("BukkitContrib") == null){
+	    if (pm.getPlugin("Spout") == null){
+	    	/*
 	        try {
 	            NetworkUtils.download(log, new URL("http://bit.ly/autoupdateBukkitContrib"), new File("plugins/BukkitContrib.jar"));
 	            pm.loadPlugin(new File("plugins" + File.separator + "BukkitContrib.jar"));
-	            pm.enablePlugin(pm.getPlugin("BukkitContrib"));
+	            pm.enablePlugin(pm.getPlugin("Spout"));
 	        } catch (final Exception ex) {
-	            log.warning("[NarrowtuxLib] Failed to install BukkitContrib, you may have to restart your server or install it manually.");
-	        }
+	            log.warning("[NarrowtuxLib] Failed to install Spout, you may have to restart your server or install it manually.");
+	        }*/
 	    }
 		load();
 		(new Thread() {
@@ -104,6 +106,7 @@ public class NarrowtuxLib extends JavaPlugin {
 		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
 		registerEvent(Type.PLUGIN_ENABLE, serverListener, Priority.Monitor);
 		registerEvent(Type.PLUGIN_DISABLE, serverListener, Priority.Monitor);
+		registerEvent(Type.CUSTOM_EVENT, new NTScreenListener());
 	}
 
 	private void registerEvent(Type type, Listener listener, Priority priority){
