@@ -17,7 +17,9 @@ public class NTLPlayerListener extends org.bukkit.event.player.PlayerListener {
 	
 	@Override
 	public void onPlayerMove(PlayerMoveEvent event){
-		Assistant.onPlayerMove(event);
+		try{
+			Assistant.onPlayerMove(event);
+		}catch(NoClassDefFoundError e){}
 	}
 	
 	@Override

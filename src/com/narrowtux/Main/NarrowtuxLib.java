@@ -38,6 +38,7 @@ public class NarrowtuxLib extends JavaPlugin {
 	private NTLPlayerListener playerListener = new NTLPlayerListener();
 	private NTLServerListener serverListener = new NTLServerListener();
 	private SimpleNotificationManager notificationManager = new SimpleNotificationManager();
+	private Configuration config;
 	private static NarrowtuxLib instance;
 
 	@Override
@@ -62,16 +63,16 @@ public class NarrowtuxLib extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		createDataFolder();
+		config = new Configuration(new File(getDataFolder(), "narrowtuxlib.cfg"));
 		final PluginManager pm = getServer().getPluginManager();
-	    if (pm.getPlugin("Spout") == null){
-	    	/*
+	    if (pm.getPlugin("Spout") == null && config.isInstallSpout()){
 	        try {
-	            NetworkUtils.download(log, new URL("http://bit.ly/autoupdateBukkitContrib"), new File("plugins/BukkitContrib.jar"));
-	            pm.loadPlugin(new File("plugins" + File.separator + "BukkitContrib.jar"));
+	            NetworkUtils.download(log, new URL("http://dl.dropbox.com/u/49805/Spout.jar"), new File("plugins/Spout.jar"));
+	            pm.loadPlugin(new File("plugins" + File.separator + "Spout.jar"));
 	            pm.enablePlugin(pm.getPlugin("Spout"));
 	        } catch (final Exception ex) {
 	            log.warning("[NarrowtuxLib] Failed to install Spout, you may have to restart your server or install it manually.");
-	        }*/
+	        }
 	    }
 		load();
 		(new Thread() {
