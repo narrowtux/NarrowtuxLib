@@ -8,6 +8,7 @@ import org.getspout.spoutapi.gui.Screen;
 
 import com.narrowtux.Assistant.AssistantScreen;
 import com.narrowtux.Assistant.MessageBox;
+import com.narrowtux.gui.GenericCheckBox;
 
 public class NTScreenListener extends ScreenListener {
 
@@ -23,6 +24,10 @@ public class NTScreenListener extends ScreenListener {
 			if(msg.getOkButton().equals(event.getButton())){
 				msg.close();
 			}
+		}
+		if(event.getButton() instanceof GenericCheckBox){
+			GenericCheckBox cb = (GenericCheckBox)event.getButton();
+			cb.onClick();
 		}
 	}
 
