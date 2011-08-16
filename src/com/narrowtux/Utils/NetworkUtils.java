@@ -26,7 +26,7 @@ public class NetworkUtils {
 	        file.delete();
 	    file.createNewFile();
 	    final int size = url.openConnection().getContentLength();
-	    if(hasLog) log.info("Downloading " + file.getName() + " (" + size / 1024 + "kb) ...");
+	    if(hasLog) log.info("[NarrowTuxLib] Downloading " + file.getName() + " (" + size / 1024 + "kb) ...");
 	    final InputStream in = url.openStream();
 	    final OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
 	    final byte[] buffer = new byte[1024];
@@ -36,13 +36,13 @@ public class NetworkUtils {
 	        out.write(buffer, 0, len);
 	        downloaded += len;
 	        if ((int)((System.currentTimeMillis() - start) / 500) > msgs) {
-	        	if(hasLog) log.info((int)((double)downloaded / (double)size * 100d) + "%");
+	        	if(hasLog) log.info("[NarrowtuxLib] " + (int)((double)downloaded / (double)size * 100d) + "%");
 	            msgs++;
 	        }
 	    }
 	    in.close();
 	    out.close();
-	    if(hasLog) log.info("Download finished");
+	    if(hasLog) log.info("[NarrowTuxLib] Download finished");
 	}
 	
 	/**
