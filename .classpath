@@ -3,10 +3,12 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="/Users/tux/minecraftserver/craftbukkit.jar"/>
-	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/iConomy-Register-8f66f7d/lib/BOSEconomy7.jar"/>
-	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/iConomy-Register-8f66f7d/lib/Essentials.jar"/>
-	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/iConomy-Register-8f66f7d/lib/iCo4.jar"/>
-	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/iConomy-Register-8f66f7d/lib/iCo5.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SpoutAPI"/>
+	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/Register/lib/BOSEconomy7.jar"/>
+	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/Register/lib/Essentials.jar"/>
+	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/Register/lib/iCo4.jar"/>
+	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/Register/lib/iCo5.jar"/>
+	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/Register/lib/iCo6.jar"/>
+	<classpathentry kind="lib" path="/Users/tux/Entwicklung/Bukkit/Register/lib/MultiCurrency.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

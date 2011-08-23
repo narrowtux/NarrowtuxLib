@@ -1,6 +1,6 @@
 name: NarrowtuxLib
 author: narrowtux
-version: 0.6.0
+version: 0.6.1
 main: com.narrowtux.Main.NarrowtuxLib
 commands:
     notification:

@@ -5,8 +5,11 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.Label;
+import org.getspout.spoutapi.gui.RenderPriority;
 import org.getspout.spoutapi.gui.Texture;
 import org.getspout.spoutapi.player.SpoutPlayer;
+
+import com.narrowtux.Main.NarrowtuxLib;
 
 public class GenericWindow extends GenericPopup {
 	private Texture background;
@@ -20,7 +23,8 @@ public class GenericWindow extends GenericPopup {
 		int width = player.getMainScreen().getWidth();
 		int height = player.getMainScreen().getHeight();
 		background.setHeight(200).setWidth(400).setX((width-400)/2).setY((height-200)/2);
-		attachWidget(background);
+		background.setPriority(RenderPriority.Highest);
+		attachWidget(NarrowtuxLib.getInstance(),background);
 		
 		marginLeft = (width-380)/2;
 		marginTop = (background.getY())+10;
@@ -29,8 +33,9 @@ public class GenericWindow extends GenericPopup {
 		
 		//Title
 		titleLabel = new GenericLabel(ChatColor.WHITE+title);
+		titleLabel.setPriority(RenderPriority.Normal);
 		titleLabel.setWidth(380).setHeight(20).setX(marginLeft+4).setY(marginTop+4);
-		attachWidget(titleLabel);
+		attachWidget(NarrowtuxLib.getInstance(),titleLabel);
 		
 	}
 

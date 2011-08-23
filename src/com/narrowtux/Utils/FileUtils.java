@@ -6,12 +6,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.jar.JarFile;
 
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class FileUtils {
 	
@@ -106,5 +111,18 @@ public class FileUtils {
 			return null;
 		}
 		
+	}
+	
+	public static void copyFromJarToDisk(String entry, JavaPlugin plugin, File pluginFile) throws IOException{
+		JarFile jar = new JarFile(pluginFile);
+		InputStream is = jar.getInputStream(jar.getJarEntry(entry));
+		OutputStream os = new FileOutputStream(new File(plugin.getDataFolder(), entry));
+		byte[] buffer = new byte[4096];
+		int length;
+		while (is!=null&&(length = is.read(buffer)) > 0) {
+		    os.write(buffer, 0, length);
+		}
+		os.close();
+		is.close();
 	}
 }
