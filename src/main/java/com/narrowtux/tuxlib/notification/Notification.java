@@ -20,7 +20,7 @@ package com.narrowtux.tuxlib.notification;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.narrowtux.tuxlib.NarrowtuxLib;
+import com.narrowtux.tuxlib.TuxLib;
 
 public class Notification {
 	private String receiver;

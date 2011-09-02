@@ -21,7 +21,7 @@ import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import com.narrowtux.tuxlib.NarrowtuxLib;
+import com.narrowtux.tuxlib.TuxLib;
 import com.narrowtux.tuxlib.assistant.Assistant;
 import com.narrowtux.tuxlib.notification.SimpleNotificationManager;
 

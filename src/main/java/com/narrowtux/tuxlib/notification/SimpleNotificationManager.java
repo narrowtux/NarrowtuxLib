@@ -28,7 +28,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import com.narrowtux.tuxlib.NarrowtuxLib;
+import com.narrowtux.tuxlib.TuxLib;
 import com.narrowtux.tuxlib.utils.FileUtils;
 
 public class SimpleNotificationManager implements NotificationManager {
