@@ -15,22 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib;
+package com.narrowtux.narrowtuxlib.assistant;
 
-import java.io.File;
+import org.bukkit.ChatColor;
 
-import com.narrowtux.tuxlib.utils.FlatFileReader;
+public enum Icon {
+	INFORMATION("http://tetragaming.com/narrowtux/pluginres/narrowtuxlib/dialog-information.png", ChatColor.BLUE+"[INFO]"),
+	ERROR("http://tetragaming.com/narrowtux/pluginres/narrowtuxlib/dialog-error.png", ChatColor.RED+"[ERROR]"),
+	WARNING("http://tetragaming.com/narrowtux/pluginres/narrowtuxlib/dialog-warning.png", ChatColor.YELLOW+"[WARNING]");
 
-public class Configuration {
-	private boolean installSpout = true;
-	private FlatFileReader reader;
-	public Configuration(File file){
-		reader = new FlatFileReader(file, false);
-		installSpout = reader.getBoolean("installspout", true);
-		reader.write();
+	private final String url;
+	private final String message;
+
+	private Icon(String url, String message){
+		this.url = url;
+		this.message = message;
 	}
-	
-	public boolean isInstallSpout(){
-		return installSpout;
+
+	public String getUrl(){
+		return url;
+	}
+
+	public String getMessage(){
+		return message;
 	}
 }

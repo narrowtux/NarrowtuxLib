@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.translation;
+package com.narrowtux.narrowtuxlib.translation;
 
 import java.io.File;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.bukkit.ChatColor;
 
-import com.narrowtux.tuxlib.utils.FlatFileReader;
+import com.narrowtux.narrowtuxlib.utils.FlatFileReader;
 
 /**
  * Translation provides a basic localisation. The files have to have the following format:

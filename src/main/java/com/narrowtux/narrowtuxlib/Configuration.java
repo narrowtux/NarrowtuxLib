@@ -15,27 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.assistant;
+package com.narrowtux.narrowtuxlib;
 
-public enum AssistantAction {
-	/**
-	 * cancels the assistant
-	 */
-	CANCEL,
-	/**
-	 * finishes the assistant
-	 */
-	FINISH,
-	/**
-	 * repeats the current page
-	 */
-	REPEAT,
-	/**
-	 * continues with the next page
-	 */
-	CONTINUE,
-	/**
-	 * repeat without showing title and text of the page again
-	 */
-	SILENT_REPEAT,
+import java.io.File;
+
+import com.narrowtux.narrowtuxlib.utils.FlatFileReader;
+
+public class Configuration {
+	private boolean installSpout = true;
+	private FlatFileReader reader;
+	public Configuration(File file){
+		reader = new FlatFileReader(file, false);
+		installSpout = reader.getBoolean("installspout", true);
+		reader.write();
+	}
+	
+	public boolean isInstallSpout(){
+		return installSpout;
+	}
 }

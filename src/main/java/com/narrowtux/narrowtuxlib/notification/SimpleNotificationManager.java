@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.notification;
+package com.narrowtux.narrowtuxlib.notification;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,8 +28,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import com.narrowtux.tuxlib.TuxLib;
-import com.narrowtux.tuxlib.utils.FileUtils;
+import com.narrowtux.narrowtuxlib.NarrowtuxLib;
+import com.narrowtux.narrowtuxlib.utils.FileUtils;
 
 public class SimpleNotificationManager implements NotificationManager {
 

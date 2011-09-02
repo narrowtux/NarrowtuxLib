@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.notification;
+package com.narrowtux.narrowtuxlib.notification;
 
 import java.util.List;
 

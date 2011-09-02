@@ -23,8 +23,8 @@ import org.getspout.spoutapi.event.screen.ScreenListener;
 import org.getspout.spoutapi.event.screen.TextFieldChangeEvent;
 import org.getspout.spoutapi.gui.Screen;
 
-import com.narrowtux.tuxlib.assistant.AssistantScreen;
-import com.narrowtux.tuxlib.assistant.MessageBox;
+import com.narrowtux.narrowtuxlib.assistant.AssistantScreen;
+import com.narrowtux.narrowtuxlib.assistant.MessageBox;
 
 public class NTScreenListener extends ScreenListener {
 

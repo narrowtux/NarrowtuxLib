@@ -3,7 +3,7 @@ version: 0.5.1.${build.number}
 author: narrowtux
 description: Library that provides translation, notification, register, and other API functions to Bukkit-based plugins.
 
-main: com.narrowtux.main.NarrowtuxLib
+main: com.narrowtux.narrowtuxlib.NarrowtuxLib
 
 commands:
   notification:

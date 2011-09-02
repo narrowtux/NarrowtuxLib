@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.assistant;
+package com.narrowtux.narrowtuxlib.assistant;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.player.PlayerChatEvent;

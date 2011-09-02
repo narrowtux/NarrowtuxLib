@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib;
+package com.narrowtux.narrowtuxlib;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,10 +41,10 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.FileUtil;
 
-import com.narrowtux.tuxlib.notification.Notification;
-import com.narrowtux.tuxlib.notification.NotificationManager;
-import com.narrowtux.tuxlib.notification.SimpleNotificationManager;
-import com.narrowtux.tuxlib.utils.NetworkUtils;
+import com.narrowtux.narrowtuxlib.notification.Notification;
+import com.narrowtux.narrowtuxlib.notification.NotificationManager;
+import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
+import com.narrowtux.narrowtuxlib.utils.NetworkUtils;
 import com.narrowtux.event.NTLPlayerListener;
 import com.narrowtux.event.NTLServerListener;
 import com.narrowtux.event.NTScreenListener;

@@ -21,9 +21,9 @@ import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import com.narrowtux.tuxlib.TuxLib;
-import com.narrowtux.tuxlib.assistant.Assistant;
-import com.narrowtux.tuxlib.notification.SimpleNotificationManager;
+import com.narrowtux.narrowtuxlib.NarrowtuxLib;
+import com.narrowtux.narrowtuxlib.assistant.Assistant;
+import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
 
 public class NTLPlayerListener extends org.bukkit.event.player.PlayerListener {
 	@Override

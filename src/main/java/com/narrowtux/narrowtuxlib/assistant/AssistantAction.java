@@ -15,13 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.assistant;
+package com.narrowtux.narrowtuxlib.assistant;
 
-public enum Accuracy {
-	INT,
-	DOUBLE,
-	FLOAT,
-	BYTE,
-	SHORT,
-	LONG;
+public enum AssistantAction {
+	/**
+	 * cancels the assistant
+	 */
+	CANCEL,
+	/**
+	 * finishes the assistant
+	 */
+	FINISH,
+	/**
+	 * repeats the current page
+	 */
+	REPEAT,
+	/**
+	 * continues with the next page
+	 */
+	CONTINUE,
+	/**
+	 * repeat without showing title and text of the page again
+	 */
+	SILENT_REPEAT,
 }

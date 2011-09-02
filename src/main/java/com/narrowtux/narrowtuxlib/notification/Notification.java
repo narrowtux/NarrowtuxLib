@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.notification;
+package com.narrowtux.narrowtuxlib.notification;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.narrowtux.tuxlib.TuxLib;
+import com.narrowtux.narrowtuxlib.NarrowtuxLib;
 
 public class Notification {
 	private String receiver;

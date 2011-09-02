@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.narrowtux.tuxlib.utils;
+package com.narrowtux.narrowtuxlib.utils;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;

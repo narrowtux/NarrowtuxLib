@@ -20,7 +20,7 @@ Compiling
 ---------
 NarrowtuxLib uses Maven to handle its dependencies.
 
-NarrowtuxLib requires CraftBukkit (preferrably the latest version or source).  
+NarrowtuxLib requires Bukkit (preferrably the latest version or source).  
 * Install [Maven 2 or 3](http://maven.apache.org/download.html)  
 * Checkout this repo and run: `mvn clean`
 
