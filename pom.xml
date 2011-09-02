@@ -1,8 +1,8 @@
 <!--
-  Maven build file for TuxLib
+  Maven build file for NarrowtuxLib
 
   Copyright (c) 2011 Moritz Schmale <narrow.m@gmail.com>
-  TuxLib is licensed under GNU GENERAL PUBLIC LICENSE Version 3
+  NarrowtuxLib is licensed under GNU GENERAL PUBLIC LICENSE Version 3
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -10,9 +10,9 @@
 
     <!-- Project information -->
     <groupId>com.narrowtux</groupId>
-    <artifactId>tuxlib</artifactId>
+    <artifactId>narrowtuxlib</artifactId>
     <version>dev-SNAPSHOT</version>
-    <name>TuxLib</name>
+    <name>NarrowtuxLib</name>
     <url>http://www.narrowtux.com</url>
     <description></description>
 
