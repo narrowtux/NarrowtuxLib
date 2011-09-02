@@ -55,6 +55,16 @@
             </snapshots>
         </repository>
         <repository>
+            <id>spout-repo</id>
+            <url>http://repo.getspout.org</url>
+            <releases>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
+            <snapshots>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
             <id>craftfire-dbrepo</id>
             <url>http://db.craftfire.com/repo</url>
         </repository>
@@ -67,6 +77,33 @@
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- SpoutAPI -->
+        <dependency>
+            <groupId>org.getspout</groupId>
+            <artifactId>spoutapi</artifactId>
+            <version>dev-SNAPSHOT</version>
+        </dependency>
+        <!-- Third-party plugins -->
+        <dependency>
+            <groupId>com.earth2me</groupId>
+            <artifactId>Essentials</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com</groupId>
+            <artifactId>iConomy</artifactId>
+            <version>5.01</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nijiko.coelho</groupId>
+            <artifactId>iConomy</artifactId>
+            <version>4.65</version>
+        </dependency>
+        <dependency>
+            <groupId>cosine</groupId>
+            <artifactId>boseconomy</artifactId>
+            <version>0.7.0</version>
         </dependency>
     </dependencies>
 
