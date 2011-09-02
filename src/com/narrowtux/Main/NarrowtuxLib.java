@@ -23,7 +23,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.FileUtil;
+import org.getspout.spoutapi.SpoutManager;
 
+import com.narrowtux.Assistant.Icon;
 import com.narrowtux.Notification.Notification;
 import com.narrowtux.Notification.NotificationManager;
 import com.narrowtux.Notification.SimpleNotificationManager;
@@ -67,7 +69,7 @@ public class NarrowtuxLib extends JavaPlugin {
 		final PluginManager pm = getServer().getPluginManager();
 	    if (pm.getPlugin("Spout") == null && config.isInstallSpout()){
 	        try {
-	            NetworkUtils.download(log, new URL("http://dl.dropbox.com/u/49805/Spout.jar"), new File("plugins/Spout.jar"));
+	            NetworkUtils.download(log, new URL("http://ci.getspout.org/view/SpoutDev/job/Spout/promotion/latest/Recommended/artifact/target/spout-dev-SNAPSHOT.jar"), new File("plugins/Spout.jar"));
 	            pm.loadPlugin(new File("plugins" + File.separator + "Spout.jar"));
 	            pm.enablePlugin(pm.getPlugin("Spout"));
 	        } catch (final Exception ex) {
@@ -80,6 +82,10 @@ public class NarrowtuxLib extends JavaPlugin {
                 update();
             }
         }).start();
+		SpoutManager.getFileManager().addToCache(this, "http://tetragaming.com/narrowtux/pluginres/narrowtuxlib/messageBoxBG.png");
+		for(Icon icon:Icon.values()){
+			SpoutManager.getFileManager().addToCache(this, icon.getUrl());
+		}
 		registerEvents();
 		sendDescription("enabled");
 	}

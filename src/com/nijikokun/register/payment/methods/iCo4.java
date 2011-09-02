@@ -1,11 +1,10 @@
 package com.nijikokun.register.payment.methods;
 
+import org.bukkit.plugin.Plugin;
+
 import com.nijiko.coelho.iConomy.iConomy;
 import com.nijiko.coelho.iConomy.system.Account;
-
 import com.nijikokun.register.payment.Method;
-
-import org.bukkit.plugin.Plugin;
 
 /**
  * iConomy 4 Implementation of Method

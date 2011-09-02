@@ -1,8 +1,10 @@
 package com.nijikokun.register.payment.methods;
 
-import com.nijikokun.register.payment.Method;
-import cosine.boseconomy.BOSEconomy;
 import org.bukkit.plugin.Plugin;
+
+import com.nijikokun.register.payment.Method;
+
+import cosine.boseconomy.BOSEconomy;
 
 /**
  * BOSEconomy 7 Implementation of Method
