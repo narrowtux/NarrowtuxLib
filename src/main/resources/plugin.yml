@@ -1,0 +1,12 @@
+name: NarrowtuxLib
+version: 0.5.1.${build.number}
+author: narrowtux
+description: Library that provides translation, notification, register, and other API functions to Bukkit-based plugins.
+
+main: com.narrowtux.narrowtuxlib.NarrowtuxLib
+
+commands:
+  notification:
+    aliases: nt
+    description: View list of notifications or a specific notification ID.
+    usage: /<command> [id]
