@@ -27,7 +27,7 @@ NarrowtuxLib requires Bukkit (preferrably the latest version or source).
 Coding and Pull Request Formatting
 ----------------------------------
 * Generally follows the Oracle coding standards.
-* Spout uses tabs, no spaces.
+* NarrowtuxLib uses tabs, no spaces.
 * No 80 column limit or midstatement newlines.
 * Pull requests must compile and work.
 * Pull requests must be formatted properly.
