@@ -92,6 +92,11 @@
         </dependency>
         <dependency>
             <groupId>com</groupId>
+            <artifactId>iCo6</artifactId>
+            <version>6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com</groupId>
             <artifactId>iConomy</artifactId>
             <version>5.01</version>
         </dependency>
@@ -104,6 +109,11 @@
             <groupId>cosine</groupId>
             <artifactId>boseconomy</artifactId>
             <version>0.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>me.ashtheking</groupId>
+            <artifactId>currency</artifactId>
+            <version>0.1</version>
         </dependency>
     </dependencies>
 
