@@ -26,7 +26,7 @@ public class Configuration {
 	private FlatFileReader reader;
 	public Configuration(File file){
 		reader = new FlatFileReader(file, false);
-		installSpout = reader.getBoolean("installspout", false);
+		installSpout = reader.getBoolean("installspout", true);
 		reader.write();
 	}
 	
