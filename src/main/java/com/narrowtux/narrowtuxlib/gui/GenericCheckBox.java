@@ -1,5 +1,6 @@
 package com.narrowtux.narrowtuxlib.gui;
 
+import org.getspout.spoutapi.gui.Button;
 import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.Label;
 
@@ -38,7 +39,7 @@ public class GenericCheckBox extends GenericButton {
 	}
 	
 	@Override 
-	public Label setText(String text){
+	public Button setText(String text){
 		this.text = text;
 		updateText();
 		return this;

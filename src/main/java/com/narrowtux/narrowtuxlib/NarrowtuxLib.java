@@ -85,15 +85,6 @@ public class NarrowtuxLib extends JavaPlugin {
 		createDataFolder();
 		config = new Configuration(new File(getDataFolder(), "narrowtuxlib.cfg"));
 		final PluginManager pm = getServer().getPluginManager();
-	    if (pm.getPlugin("Spout") == null && config.isInstallSpout()){
-	        try {
-	            NetworkUtils.download(log, new URL("http://ci.getspout.org/view/SpoutDev/job/Spout/promotion/latest/Recommended/artifact/target/spout-dev-SNAPSHOT.jar"), new File("plugins/Spout.jar"));
-	            pm.loadPlugin(new File("plugins" + File.separator + "Spout.jar"));
-	            pm.enablePlugin(pm.getPlugin("Spout"));
-	        } catch (final Exception ex) {
-	            log.warning("[NarrowtuxLib] Failed to install Spout, you may have to restart your server or install it manually.");
-	        }
-	    }
 		load();
 		(new Thread() {
             public void run() {
@@ -302,5 +293,33 @@ public class NarrowtuxLib extends JavaPlugin {
 			getLogger().warning("No Payment method found! Plugins that rely on this might not work! (And you might see an exception stack trace below this).");
 		}
 		return ret;
+	}
+	
+	/**
+	 * Downloads the spout plugin and installs it.
+	 * @warning this depends on the spout config value in the narrowtux configuration.
+	 * @return if the installation has been successful.
+	 */
+	public boolean installSpout() {
+		if(config.isInstallSpout()) {
+			final PluginManager pm = getServer().getPluginManager();
+		    if (pm.getPlugin("Spout") == null && config.isInstallSpout()){
+		        try {
+		            NetworkUtils.download(log, new URL("http://ci.getspout.org/view/SpoutDev/job/Spout/promotion/latest/Recommended/artifact/target/spout-dev-SNAPSHOT.jar"), new File("plugins/Spout.jar"));
+		            pm.loadPlugin(new File("plugins" + File.separator + "Spout.jar"));
+		            pm.enablePlugin(pm.getPlugin("Spout"));
+		        } catch (final Exception ex) {
+		            log.warning("[NarrowtuxLib] Failed to install Spout, you may have to restart your server or install it manually.");
+		            return false;
+		        }
+		        return true;
+		    }
+		}
+		return false;
+	}
+	
+	public static boolean isSpoutInstalled() {
+		PluginManager pm = instance.getServer().getPluginManager();
+		return pm.getPlugin("Spout")!=null;
 	}
 }
