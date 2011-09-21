@@ -86,14 +86,18 @@ public class NarrowtuxLib extends JavaPlugin {
 		config = new Configuration(new File(getDataFolder(), "narrowtuxlib.cfg"));
 		final PluginManager pm = getServer().getPluginManager();
 		load();
-		(new Thread() {
-            public void run() {
-                update();
-            }
-        }).start();
-		SpoutManager.getFileManager().addToCache(this, "http://tetragaming.com/narrowtux/pluginres/narrowtuxlib/messageBoxBG.png");
-		for(Icon icon:Icon.values()){
-			SpoutManager.getFileManager().addToCache(this, icon.getUrl());
+		if(config.isAutoUpdate()){
+			(new Thread() {
+	            public void run() {
+	                update();
+	            }
+	        }).start();
+		}
+		if(isSpoutInstalled()){
+			SpoutManager.getFileManager().addToCache(this, "http://tetragaming.com/narrowtux/pluginres/narrowtuxlib/messageBoxBG.png");
+			for(Icon icon:Icon.values()){
+				SpoutManager.getFileManager().addToCache(this, icon.getUrl());
+			}
 		}
 		registerEvents();
 		sendDescription("enabled");
@@ -122,7 +126,9 @@ public class NarrowtuxLib extends JavaPlugin {
 		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
 		registerEvent(Type.PLUGIN_ENABLE, serverListener, Priority.Monitor);
 		registerEvent(Type.PLUGIN_DISABLE, serverListener, Priority.Monitor);
-		registerEvent(Type.CUSTOM_EVENT, new NTScreenListener());
+		if(isSpoutInstalled()){
+			registerEvent(Type.CUSTOM_EVENT, new NTScreenListener());
+		}
 	}
 
 	private void registerEvent(Type type, Listener listener, Priority priority){

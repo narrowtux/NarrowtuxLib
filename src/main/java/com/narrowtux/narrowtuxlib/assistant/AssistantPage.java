@@ -85,23 +85,21 @@ public class AssistantPage {
 	 * Shows the title and text of the page. Will be called whenever this has become the current page.
 	 */
 	public void play(){
-		if(getAssistant().useGUI()){
-			getAssistant().getScreen().renderPage(this);
-		} else {
-			String message = "";
-			if(!getTitle().equals("")){
-				message += assistant.getSeparator()+"\n";
-				message += assistant.formatLine(getTitle())+"\n";
-			}
+		getAssistant().render(this);
+		String message = "";
+		if(!getTitle().equals("")){
 			message += assistant.getSeparator()+"\n";
-			if(!getText().equals("")){
-				for(String line:getText().split("\n")){
-					message += assistant.formatLine(line)+"\n";
-				}
-				message += assistant.getSeparator();
-			}
-			assistant.sendMessage(message);
+			message += assistant.formatLine(getTitle())+"\n";
 		}
+		message += assistant.getSeparator()+"\n";
+		if(!getText().equals("")){
+			for(String line:getText().split("\n")){
+				message += assistant.formatLine(line)+"\n";
+			}
+			message += assistant.getSeparator();
+		}
+		assistant.sendMessage(message);
+		
 	}
 
 	/**

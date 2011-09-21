@@ -28,19 +28,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import org.getspout.spoutapi.player.SpoutPlayer;
-
 public class Assistant {
 	private List<AssistantPage> pages = new ArrayList<AssistantPage>();
 	private String title = "Generic assistant";
-	private AssistantPage currentPage = null;
+	protected AssistantPage currentPage = null;
 	private int currentPageIndex = 0;
 	private Player player = null;
 	private String heldBackChat = "";
 	private Location assistantStartLocation = null;
-	private static Map<Player, Assistant> instances = new HashMap<Player, Assistant>();
-	private AssistantScreen screen = null;
-	private boolean active;
+	protected static Map<Player, Assistant> instances = new HashMap<Player, Assistant>();
+	protected boolean active;
 
 	/**
 	 * Creates an assistant.
@@ -215,15 +212,10 @@ public class Assistant {
 	public void start(){
 		active = true;
 		instances.put(getPlayer(),this);
-		if(useGUI()){
-			screen = createAssistantScreen();
-			getSpoutPlayer().getMainScreen().attachPopupScreen(screen);
-		} else {
-			String message = getSeparator()+"\n";
-			message += formatLine(getTitle())+"\n";
-			message += getSeparator();
-			sendMessage(message);
-		}
+		String message = getSeparator()+"\n";
+		message += formatLine(getTitle())+"\n";
+		message += getSeparator();
+		sendMessage(message);
 		currentPage.play();
 	}
 
@@ -250,12 +242,8 @@ public class Assistant {
 		remove();
 	}
 
-	private void closeScreen(){
+	protected void closeScreen(){
 		active = false;
-		if(useGUI()){
-			screen.close();
-			screen = null;
-		}
 	}
 
 	private void remove(){
@@ -275,18 +263,11 @@ public class Assistant {
 	 * Multilines will be sent seperately
 	 */
 	public void sendMessage(String text){
-		if(useGUI()){
-			MessageBox msg = new MessageBox("Message", text, Icon.INFORMATION, getSpoutPlayer());
-			if(screen!=null)
-				screen.attachMessageBox(msg);
-			else
-				getSpoutPlayer().getMainScreen().attachPopupScreen(msg);
-		} else {
-			for(String line:text.split("\n")){
-				getPlayer().sendMessage(line);
-			}
+		for(String line:text.split("\n")){
+			getPlayer().sendMessage(line);
 		}
 	}
+	
 
 	/**
 	 * @returns the seperator
@@ -330,36 +311,19 @@ public class Assistant {
 		pages.add(currentPageIndex+1, getCurrentPage());
 	}
 
-	public SpoutPlayer getSpoutPlayer(){
-		return (SpoutPlayer)player;
-	}
-
-	public boolean useGUI(){
-		SpoutPlayer player = (SpoutPlayer)this.player;
-		return player.getVersion()>=18;
-	}
-
-	public AssistantScreen getScreen(){
-		return screen;
-	}
-
 	public boolean isActive(){
 		return active;
 	}
 
 	public void sendMessage(Icon icon, String title, String text){
-		if(useGUI()){
-			MessageBox msg = new MessageBox(title, text, icon, getSpoutPlayer());
-			if(screen!=null)
-				screen.attachMessageBox(msg);
-			else
-				getSpoutPlayer().getMainScreen().attachPopupScreen(msg);
-		} else {
-			sendMessage(icon.getMessage()+" "+ChatColor.WHITE+title+"\n"+ChatColor.WHITE+text);
-		}
+		sendMessage(icon.getMessage()+" "+ChatColor.WHITE+title+"\n"+ChatColor.WHITE+text);
 	}
-
-	public AssistantScreen createAssistantScreen(){
-		return new AssistantScreen(this);
+	
+	public void render(AssistantPage page){
+		
+	}
+	
+	public boolean useGUI(){
+		return false;
 	}
 }

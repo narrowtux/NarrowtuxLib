@@ -29,12 +29,12 @@ import org.getspout.spoutapi.gui.TextField;
 import org.getspout.spoutapi.gui.Widget;
 
 public class AssistantScreen extends GenericWindow {
-	private Assistant assistant;
+	private GuiAssistant assistant;
 	private Label pageText = null;
 	private TextField pageInput = null;
 	private Button button = null;
 	private MessageBox currentMsg = null;
-	public AssistantScreen(Assistant assistant) {
+	public AssistantScreen(GuiAssistant assistant) {
 		super(assistant.getTitle(), assistant.getSpoutPlayer());
 		this.assistant = assistant;
 	}

@@ -23,14 +23,20 @@ import com.narrowtux.narrowtuxlib.utils.FlatFileReader;
 
 public class Configuration {
 	private boolean installSpout = true;
+	private boolean autoUpdate = true;
 	private FlatFileReader reader;
 	public Configuration(File file){
 		reader = new FlatFileReader(file, false);
 		installSpout = reader.getBoolean("installspout", true);
+		autoUpdate = reader.getBoolean("autoupdate", true);
 		reader.write();
 	}
 	
 	public boolean isInstallSpout(){
 		return installSpout;
+	}
+	
+	public boolean isAutoUpdate(){
+		return autoUpdate;
 	}
 }
