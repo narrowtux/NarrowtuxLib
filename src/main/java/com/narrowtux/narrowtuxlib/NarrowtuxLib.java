@@ -17,18 +17,15 @@
 
 package com.narrowtux.narrowtuxlib;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import com.narrowtux.narrowtuxlib.assistant.Icon;
+import com.narrowtux.narrowtuxlib.event.NTLPlayerListener;
+import com.narrowtux.narrowtuxlib.event.NTScreenListener;
+import com.narrowtux.narrowtuxlib.notification.Notification;
+import com.narrowtux.narrowtuxlib.notification.NotificationManager;
+import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
+import com.narrowtux.narrowtuxlib.utils.NetworkUtils;
+import com.nijikokun.register.payment.Method;
+import com.nijikokun.register.payment.Methods;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -42,24 +39,25 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.FileUtil;
 import org.getspout.spoutapi.SpoutManager;
 
-import com.narrowtux.narrowtuxlib.event.NTScreenListener;
-import com.narrowtux.narrowtuxlib.assistant.Icon;
-import com.narrowtux.narrowtuxlib.event.NTLPlayerListener;
-import com.narrowtux.narrowtuxlib.event.NTLServerListener;
-import com.narrowtux.narrowtuxlib.notification.Notification;
-import com.narrowtux.narrowtuxlib.notification.NotificationManager;
-import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
-import com.narrowtux.narrowtuxlib.utils.NetworkUtils;
-
-import com.nijikokun.register.payment.Method;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NarrowtuxLib extends JavaPlugin {
 	private static Logger log = Bukkit.getServer().getLogger();
 	private NTLPlayerListener playerListener = new NTLPlayerListener();
-	private NTLServerListener serverListener = new NTLServerListener();
 	private SimpleNotificationManager notificationManager = new SimpleNotificationManager();
 	private Configuration config;
 	private static NarrowtuxLib instance;
+    private static Method method = null;
 
 	@Override
 	public void onDisable() {
@@ -99,11 +97,21 @@ public class NarrowtuxLib extends JavaPlugin {
 				SpoutManager.getFileManager().addToCache(this, icon.getUrl());
 			}
 		}
+        loadRegister();
 		registerEvents();
 		sendDescription("enabled");
 	}
 
-	private void load() {
+    private void loadRegister() {
+        Methods.setPreferred("iConomy");
+        Methods.setMethod(getServer().getPluginManager());
+        if (Methods.getMethod() != null) {
+            method = Methods.getMethod();
+            log.warning("Economy method found: " + getMethod().getName() + getMethod().getVersion());
+        }
+    }
+
+    private void load() {
 		//Load Notifications
 		notificationManager.load();
 	}
@@ -124,8 +132,6 @@ public class NarrowtuxLib extends JavaPlugin {
 		registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Lowest);
 		registerEvent(Type.PLAYER_MOVE, playerListener);
 		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
-		registerEvent(Type.PLUGIN_ENABLE, serverListener, Priority.Monitor);
-		registerEvent(Type.PLUGIN_DISABLE, serverListener, Priority.Monitor);
 		if(isSpoutInstalled()){
 			registerEvent(Type.CUSTOM_EVENT, new NTScreenListener());
 		}
@@ -293,12 +299,11 @@ public class NarrowtuxLib extends JavaPlugin {
 	}
 
 	public static Method getMethod(){
-		Method ret = getInstance().serverListener.getMethod();
-		if(ret==null)
+		if(method == null)
 		{
 			getLogger().warning("No Payment method found! Plugins that rely on this might not work! (And you might see an exception stack trace below this).");
 		}
-		return ret;
+		return method;
 	}
 	
 	/**
