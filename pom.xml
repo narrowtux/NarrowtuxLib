@@ -29,47 +29,6 @@
         </license>
     </licenses>
 
-    <!-- Source code -->
-    <scm>
-        <developerConnection>scm:git:git@github.com:narrowtux/${project.name}.git</developerConnection>
-        <connection>scm:git:git://github.com/narrowtux/${project.name}.git</connection>
-        <url>https://github.com/narrowtux/${project.name}</url>
-    </scm>
-
-    <!-- Continuous integration -->
-    <ciManagement>
-        <system>jenkins</system>
-        <url>http://ci.craftfire.com</url>
-    </ciManagement>
-
-    <!-- Repository locations -->
-    <repositories>
-        <repository>
-            <id>craftfire-repo</id>
-            <url>http://repo.craftfire.com</url>
-            <releases>
-                <updatePolicy>daily</updatePolicy>
-            </releases>
-            <snapshots>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spout-repo</id>
-            <url>http://repo.getspout.org</url>
-            <releases>
-                <updatePolicy>daily</updatePolicy>
-            </releases>
-            <snapshots>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>craftfire-dbrepo</id>
-            <url>http://db.craftfire.com/repo</url>
-        </repository>
-    </repositories>
-
     <!-- Dependencies -->
     <dependencies>
         <!-- Bukkit -->
@@ -86,35 +45,11 @@
         </dependency>
         <!-- Third-party plugins -->
         <dependency>
-            <groupId>com.earth2me</groupId>
-            <artifactId>Essentials</artifactId>
-            <version>2.4.2</version>
+            <groupId>com.nijikokun</groupId>
+            <artifactId>Register</artifactId>
+            <version>1.5</version>
         </dependency>
-        <dependency>
-            <groupId>com</groupId>
-            <artifactId>iCo6</artifactId>
-            <version>6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com</groupId>
-            <artifactId>iConomy</artifactId>
-            <version>5.01</version>
-        </dependency>
-        <dependency>
-            <groupId>com.nijiko.coelho</groupId>
-            <artifactId>iConomy</artifactId>
-            <version>4.65</version>
-        </dependency>
-        <dependency>
-            <groupId>cosine</groupId>
-            <artifactId>boseconomy</artifactId>
-            <version>0.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>me.ashtheking</groupId>
-            <artifactId>currency</artifactId>
-            <version>0.1</version>
-        </dependency>
+
     </dependencies>
 
     <build>

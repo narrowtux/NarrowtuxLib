@@ -4,6 +4,7 @@ author: narrowtux
 description: Library that provides translation, notification, register, and other API functions to Bukkit-based plugins.
 
 main: com.narrowtux.narrowtuxlib.NarrowtuxLib
+softdepend: [Register]
 
 commands:
   notification:
