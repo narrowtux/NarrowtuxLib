@@ -3,7 +3,7 @@ version: 1.0.0
 author: narrowtux
 description: Library that provides translation, notification, register, and other API functions to Bukkit-based plugins.
 
-softdepends: [Spout, Register]
+softdepend: [Spout, Register]
 
 main: com.narrowtux.narrowtuxlib.NarrowtuxLib
 

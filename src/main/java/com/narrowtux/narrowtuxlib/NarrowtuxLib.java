@@ -38,9 +38,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.InvalidDescriptionException;
+import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.FileUtil;
 import org.getspout.spoutapi.SpoutManager;
@@ -302,11 +305,12 @@ public class NarrowtuxLib extends JavaPlugin {
 		Plugin pl = Bukkit.getPluginManager().getPlugin("Register");
 		if (pl == null || !(pl instanceof Register) && config.isInstallRegister()) {
 			try {
-				NetworkUtils.download(getLogger(), new URL("https://github.com/downloads/iConomy/Register/Register-1.5.jar"), new File("plugins", "Register.jar"));
-			} catch (MalformedURLException e) {
+				NetworkUtils.download(getLogger(), new URL("http://ci.getspout.org/view/Economy/job/Register/lastSuccessfulBuild/artifact/register-1.5.jar"), new File("plugins", "Register.jar"));
+				Bukkit.getPluginManager().loadPlugin(new File("plugins", "Register.jar"));
+				Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin("Register"));
+			} catch (Exception e) {
 				getLogger().log(Level.WARNING, "Couldn't install register");
-			} catch (IOException e) {
-				getLogger().log(Level.WARNING, "Couldn't install register");
+				e.printStackTrace();
 			}
 		}
 	}
