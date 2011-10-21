@@ -48,7 +48,6 @@ import org.getspout.spoutapi.SpoutManager;
 import com.narrowtux.narrowtuxlib.event.NTScreenListener;
 import com.narrowtux.narrowtuxlib.assistant.Icon;
 import com.narrowtux.narrowtuxlib.event.NTLPlayerListener;
-import com.narrowtux.narrowtuxlib.event.NTLServerListener;
 import com.narrowtux.narrowtuxlib.notification.Notification;
 import com.narrowtux.narrowtuxlib.notification.NotificationManager;
 import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
@@ -61,7 +60,6 @@ import com.nijikokun.register.payment.Methods;
 public class NarrowtuxLib extends JavaPlugin {
 	private static Logger log = Bukkit.getServer().getLogger();
 	private NTLPlayerListener playerListener = new NTLPlayerListener();
-	private NTLServerListener serverListener = new NTLServerListener();
 	private SimpleNotificationManager notificationManager = new SimpleNotificationManager();
 	private Configuration config;
 	private static NarrowtuxLib instance;
@@ -130,8 +128,6 @@ public class NarrowtuxLib extends JavaPlugin {
 		registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Lowest);
 		registerEvent(Type.PLAYER_MOVE, playerListener);
 		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
-		registerEvent(Type.PLUGIN_ENABLE, serverListener, Priority.Monitor);
-		registerEvent(Type.PLUGIN_DISABLE, serverListener, Priority.Monitor);
 		if(isSpoutInstalled()){
 			registerEvent(Type.CUSTOM_EVENT, new NTScreenListener());
 		}

@@ -86,34 +86,9 @@
         </dependency>
         <!-- Third-party plugins -->
         <dependency>
-            <groupId>com.earth2me</groupId>
-            <artifactId>Essentials</artifactId>
-            <version>2.4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com</groupId>
-            <artifactId>iCo6</artifactId>
-            <version>6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com</groupId>
-            <artifactId>iConomy</artifactId>
-            <version>5.01</version>
-        </dependency>
-        <dependency>
-            <groupId>com.nijiko.coelho</groupId>
-            <artifactId>iConomy</artifactId>
-            <version>4.65</version>
-        </dependency>
-        <dependency>
-            <groupId>cosine</groupId>
-            <artifactId>boseconomy</artifactId>
-            <version>0.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>me.ashtheking</groupId>
-            <artifactId>currency</artifactId>
-            <version>0.1</version>
+            <groupId>com.nijikokun</groupId>
+            <artifactId>register</artifactId>
+            <version>1.5</version>
         </dependency>
     </dependencies>
 
