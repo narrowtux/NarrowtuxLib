@@ -20,8 +20,10 @@ package com.narrowtux.narrowtuxlib;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -36,6 +38,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -51,7 +54,9 @@ import com.narrowtux.narrowtuxlib.notification.NotificationManager;
 import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
 import com.narrowtux.narrowtuxlib.utils.NetworkUtils;
 
+import com.nijikokun.register.Register;
 import com.nijikokun.register.payment.Method;
+import com.nijikokun.register.payment.Methods;
 
 public class NarrowtuxLib extends JavaPlugin {
 	private static Logger log = Bukkit.getServer().getLogger();
@@ -99,6 +104,7 @@ public class NarrowtuxLib extends JavaPlugin {
 				SpoutManager.getFileManager().addToCache(this, icon.getUrl());
 			}
 		}
+		checkForRegister();
 		registerEvents();
 		sendDescription("enabled");
 	}
@@ -293,12 +299,20 @@ public class NarrowtuxLib extends JavaPlugin {
 	}
 
 	public static Method getMethod(){
-		Method ret = getInstance().serverListener.getMethod();
-		if(ret==null)
-		{
-			getLogger().warning("No Payment method found! Plugins that rely on this might not work! (And you might see an exception stack trace below this).");
+		return Methods.getMethod();
+	}
+	
+	protected void checkForRegister() {
+		Plugin pl = Bukkit.getPluginManager().getPlugin("Register");
+		if (pl == null || !(pl instanceof Register) && config.isInstallRegister()) {
+			try {
+				NetworkUtils.download(getLogger(), new URL("https://github.com/downloads/iConomy/Register/Register-1.5.jar"), new File("plugins", "Register.jar"));
+			} catch (MalformedURLException e) {
+				getLogger().log(Level.WARNING, "Couldn't install register");
+			} catch (IOException e) {
+				getLogger().log(Level.WARNING, "Couldn't install register");
+			}
 		}
-		return ret;
 	}
 	
 	/**

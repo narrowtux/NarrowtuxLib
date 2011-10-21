@@ -24,11 +24,13 @@ import com.narrowtux.narrowtuxlib.utils.FlatFileReader;
 public class Configuration {
 	private boolean installSpout = true;
 	private boolean autoUpdate = true;
+	private boolean installRegister = true;
 	private FlatFileReader reader;
 	public Configuration(File file){
 		reader = new FlatFileReader(file, false);
 		installSpout = reader.getBoolean("installspout", true);
 		autoUpdate = reader.getBoolean("autoupdate", true);
+		installRegister = reader.getBoolean("installregister", true);
 		reader.write();
 	}
 	
@@ -38,5 +40,9 @@ public class Configuration {
 	
 	public boolean isAutoUpdate(){
 		return autoUpdate;
+	}
+	
+	public boolean isInstallRegister() {
+		return installRegister;
 	}
 }
