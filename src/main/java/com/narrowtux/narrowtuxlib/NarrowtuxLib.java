@@ -303,7 +303,7 @@ public class NarrowtuxLib extends JavaPlugin {
 	
 	protected void checkForRegister() {
 		Plugin pl = Bukkit.getPluginManager().getPlugin("Register");
-		if (pl == null || !(pl instanceof Register) && config.isInstallRegister()) {
+		if ((pl == null || !(pl instanceof Register)) && config.isInstallRegister()) {
 			try {
 				NetworkUtils.download(getLogger(), new URL("http://ci.getspout.org/view/Economy/job/Register/lastSuccessfulBuild/artifact/register-1.5.jar"), new File("plugins", "Register.jar"));
 				Bukkit.getPluginManager().loadPlugin(new File("plugins", "Register.jar"));
