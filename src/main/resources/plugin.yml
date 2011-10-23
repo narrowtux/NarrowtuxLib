@@ -1,5 +1,5 @@
 name: NarrowtuxLib
-version: 1.0.0
+version: 1.0.1
 author: narrowtux
 description: Library that provides translation, notification, register, and other API functions to Bukkit-based plugins.
 
