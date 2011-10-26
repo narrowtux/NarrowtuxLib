@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.nijiko.coelho</groupId>
             <artifactId>iConomy</artifactId>
-            <version>4.0</version>
+            <version>4.65</version>
         </dependency>
         <!-- iCo5 -->
         <dependency>
