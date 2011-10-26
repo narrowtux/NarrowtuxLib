@@ -14,7 +14,7 @@
     <version>dev-SNAPSHOT</version>
     <name>NarrowtuxLib</name>
     <url>http://www.narrowtux.com</url>
-    <description></description>
+    <description>Library that provides translation, notification, register, and other API functions to Bukkit-based plugins.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -47,9 +47,6 @@
         <repository>
             <id>craftfire-repo</id>
             <url>http://repo.craftfire.com</url>
-            <releases>
-                <updatePolicy>daily</updatePolicy>
-            </releases>
             <snapshots>
                 <updatePolicy>daily</updatePolicy>
             </snapshots>
@@ -57,16 +54,9 @@
         <repository>
             <id>spout-repo</id>
             <url>http://repo.getspout.org</url>
-            <releases>
-                <updatePolicy>daily</updatePolicy>
-            </releases>
             <snapshots>
                 <updatePolicy>daily</updatePolicy>
             </snapshots>
-        </repository>
-        <repository>
-            <id>craftfire-dbrepo</id>
-            <url>http://db.craftfire.com/repo</url>
         </repository>
     </repositories>
 
@@ -84,53 +74,52 @@
             <artifactId>spoutapi</artifactId>
             <version>dev-SNAPSHOT</version>
         </dependency>
-        <!-- Third-party plugins -->
         <!-- 3co -->
         <dependency>
             <groupId>me.ic3d</groupId>
-            <artifactId>3co</artifactId>
-            <version>1.0</version>
+            <artifactId>eco</artifactId>
+            <version>2.0</version>
         </dependency>
         <!-- iCo4 -->
         <dependency>
             <groupId>com.nijiko.coelho</groupId>
-            <artifactId>iconomy</artifactId>
+            <artifactId>iConomy</artifactId>
             <version>4.0</version>
         </dependency>
         <!-- iCo5 -->
         <dependency>
-            <groupId>com.nijikokun</groupId>
+            <groupId>com</groupId>
             <artifactId>iConomy</artifactId>
             <version>5.0</version>
         </dependency>
         <!-- iCo6 -->
         <dependency>
-            <groupId>com.nijikokun</groupId>
-            <artifactId>iconomy</artifactId>
-            <version>6.0</version>
+            <groupId>com</groupId>
+            <artifactId>iCo6</artifactId>
+            <version>6.0.7b</version>
         </dependency>
         <!-- BOSEconomy7 -->
         <dependency>
-            <groupId>com.cosine</groupId>
+            <groupId>cosine</groupId>
             <artifactId>boseconomy</artifactId>
-            <version>7.0</version>
+            <version>0.7.1</version>
         </dependency>
         <!-- MultiCurrency -->
         <dependency>
             <groupId>me.ashtheking</groupId>
             <artifactId>currency</artifactId>
-            <version>1.0</version>
+            <version>0.1</version>
         </dependency>
         <!-- Essentials :/ -->
         <dependency>
             <groupId>com.earth2me</groupId>
             <artifactId>essentials</artifactId>
-            <version>1.0</version>
+            <version>2.6.4</version>
         </dependency>
     </dependencies>
 
     <build>
-        <defaultGoal>clean</defaultGoal>
+        <defaultGoal>clean package</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <!-- Resources -->
         <resources>
@@ -139,8 +128,15 @@
                 <filtering>true</filtering>
                 <directory>${basedir}/src/main/resources</directory>
                 <includes>
-                    <include>LICENSE.txt</include>
                     <include>plugin.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>false</filtering>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>LICENSE.txt</include>
                 </includes>
             </resource>
         </resources>
