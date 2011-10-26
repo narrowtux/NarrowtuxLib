@@ -85,10 +85,47 @@
             <version>dev-SNAPSHOT</version>
         </dependency>
         <!-- Third-party plugins -->
+        <!-- 3co -->
+        <dependency>
+            <groupId>me.ic3d</groupId>
+            <artifactId>3co</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- iCo4 -->
+        <dependency>
+            <groupId>com.nijiko.coelho</groupId>
+            <artifactId>iconomy</artifactId>
+            <version>4.0</version>
+        </dependency>
+        <!-- iCo5 -->
         <dependency>
             <groupId>com.nijikokun</groupId>
-            <artifactId>register</artifactId>
-            <version>1.5</version>
+            <artifactId>iConomy</artifactId>
+            <version>5.0</version>
+        </dependency>
+        <!-- iCo6 -->
+        <dependency>
+            <groupId>com.nijikokun</groupId>
+            <artifactId>iconomy</artifactId>
+            <version>6.0</version>
+        </dependency>
+        <!-- BOSEconomy7 -->
+        <dependency>
+            <groupId>com.cosine</groupId>
+            <artifactId>boseconomy</artifactId>
+            <version>7.0</version>
+        </dependency>
+        <!-- MultiCurrency -->
+        <dependency>
+            <groupId>me.ashtheking</groupId>
+            <artifactId>currency</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- Essentials :/ -->
+        <dependency>
+            <groupId>com.earth2me</groupId>
+            <artifactId>essentials</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

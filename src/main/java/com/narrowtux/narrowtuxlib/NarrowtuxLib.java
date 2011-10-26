@@ -20,10 +20,8 @@ package com.narrowtux.narrowtuxlib;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -38,33 +36,30 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.FileUtil;
 import org.getspout.spoutapi.SpoutManager;
 
-import com.narrowtux.narrowtuxlib.event.NTScreenListener;
 import com.narrowtux.narrowtuxlib.assistant.Icon;
 import com.narrowtux.narrowtuxlib.event.NTLPlayerListener;
+import com.narrowtux.narrowtuxlib.event.NTScreenListener;
 import com.narrowtux.narrowtuxlib.notification.Notification;
 import com.narrowtux.narrowtuxlib.notification.NotificationManager;
 import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
 import com.narrowtux.narrowtuxlib.utils.NetworkUtils;
-
-import com.nijikokun.register.Register;
-import com.nijikokun.register.payment.Method;
-import com.nijikokun.register.payment.Methods;
+import com.nijikokun.register.narrowtuxlib.payment.Method;
+import com.nijikokun.register.narrowtuxlib.payment.Methods;
 
 public class NarrowtuxLib extends JavaPlugin {
 	private static Logger log = Bukkit.getServer().getLogger();
 	private NTLPlayerListener playerListener = new NTLPlayerListener();
 	private SimpleNotificationManager notificationManager = new SimpleNotificationManager();
 	private Configuration config;
+	private com.nijikokun.register.narrowtuxlib.listeners.server serverListener = new com.nijikokun.register.narrowtuxlib.listeners.server(this);
+	public PluginDescriptionFile info;
 	private static NarrowtuxLib instance;
 
 	@Override
@@ -88,6 +83,7 @@ public class NarrowtuxLib extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
+		info = getDescription();
 		createDataFolder();
 		config = new Configuration(new File(getDataFolder(), "narrowtuxlib.cfg"));
 		final PluginManager pm = getServer().getPluginManager();
@@ -105,7 +101,6 @@ public class NarrowtuxLib extends JavaPlugin {
 				SpoutManager.getFileManager().addToCache(this, icon.getUrl());
 			}
 		}
-		checkForRegister();
 		registerEvents();
 		sendDescription("enabled");
 	}
@@ -131,6 +126,8 @@ public class NarrowtuxLib extends JavaPlugin {
 		registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Lowest);
 		registerEvent(Type.PLAYER_MOVE, playerListener);
 		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
+		registerEvent(Type.PLUGIN_ENABLE, serverListener, Priority.Normal);
+		registerEvent(Type.PLUGIN_DISABLE, serverListener, Priority.Normal);
 		if(isSpoutInstalled()){
 			registerEvent(Type.CUSTOM_EVENT, new NTScreenListener());
 		}
@@ -299,20 +296,6 @@ public class NarrowtuxLib extends JavaPlugin {
 
 	public static Method getMethod(){
 		return Methods.getMethod();
-	}
-	
-	protected void checkForRegister() {
-		Plugin pl = Bukkit.getPluginManager().getPlugin("Register");
-		if ((pl == null || !(pl instanceof Register)) && config.isInstallRegister()) {
-			try {
-				NetworkUtils.download(getLogger(), new URL("http://ci.getspout.org/view/Economy/job/Register/lastSuccessfulBuild/artifact/register-1.5.jar"), new File("plugins", "Register.jar"));
-				Bukkit.getPluginManager().loadPlugin(new File("plugins", "Register.jar"));
-				Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin("Register"));
-			} catch (Exception e) {
-				getLogger().log(Level.WARNING, "Couldn't install register");
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	/**
