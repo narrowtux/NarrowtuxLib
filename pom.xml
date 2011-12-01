@@ -39,78 +39,59 @@
     <!-- Continuous integration -->
     <ciManagement>
         <system>jenkins</system>
-        <url>http://ci.craftfire.com</url>
+        <url>http://ci.getspout.org</url>
     </ciManagement>
 
     <!-- Repository locations -->
     <repositories>
         <repository>
-            <id>craftfire-repo</id>
-            <url>http://repo.craftfire.com</url>
-            <snapshots>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
             <id>spout-repo</id>
             <url>http://repo.getspout.org</url>
-            <snapshots>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
         </repository>
     </repositories>
 
     <!-- Dependencies -->
     <dependencies>
-        <!-- Bukkit -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!-- SpoutAPI -->
         <dependency>
             <groupId>org.getspout</groupId>
             <artifactId>spoutapi</artifactId>
             <version>dev-SNAPSHOT</version>
         </dependency>
-        <!-- 3co -->
         <dependency>
             <groupId>me.ic3d</groupId>
             <artifactId>eco</artifactId>
             <version>2.0</version>
         </dependency>
-        <!-- iCo4 -->
         <dependency>
             <groupId>com.nijiko.coelho</groupId>
             <artifactId>iConomy</artifactId>
             <version>4.65</version>
         </dependency>
-        <!-- iCo5 -->
         <dependency>
             <groupId>com</groupId>
             <artifactId>iConomy</artifactId>
             <version>5.0</version>
         </dependency>
-        <!-- iCo6 -->
         <dependency>
             <groupId>com</groupId>
             <artifactId>iCo6</artifactId>
             <version>6.0.7b</version>
         </dependency>
-        <!-- BOSEconomy7 -->
         <dependency>
             <groupId>cosine</groupId>
             <artifactId>boseconomy</artifactId>
             <version>0.7.1</version>
         </dependency>
-        <!-- MultiCurrency -->
         <dependency>
             <groupId>me.ashtheking</groupId>
             <artifactId>currency</artifactId>
             <version>0.1</version>
         </dependency>
-        <!-- Essentials :/ -->
         <dependency>
             <groupId>com.earth2me</groupId>
             <artifactId>essentials</artifactId>
@@ -134,7 +115,7 @@
             <resource>
                 <targetPath>.</targetPath>
                 <filtering>false</filtering>
-                <directory>${basedir}/src/main/resources</directory>
+                <directory>${basedir}</directory>
                 <includes>
                     <include>LICENSE.txt</include>
                 </includes>
