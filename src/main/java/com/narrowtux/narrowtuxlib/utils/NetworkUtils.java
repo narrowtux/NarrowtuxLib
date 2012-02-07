@@ -36,29 +36,29 @@ public class NetworkUtils {
 	 */
 	public static void download(Logger log, URL url, File file) throws IOException {
 		boolean hasLog = log!=null;
-	    if (!file.getParentFile().exists())
-	        file.getParentFile().mkdir();
-	    if (file.exists())
-	        file.delete();
-	    file.createNewFile();
-	    final int size = url.openConnection().getContentLength();
-	    if(hasLog) log.info("Downloading " + file.getName() + " (" + size / 1024 + "kb) ...");
-	    final InputStream in = url.openStream();
-	    final OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-	    final byte[] buffer = new byte[1024];
-	    int len, downloaded = 0, msgs = 0;
-	    final long start = System.currentTimeMillis();
-	    while ((len = in.read(buffer)) >= 0) {
-	        out.write(buffer, 0, len);
-	        downloaded += len;
-	        if ((int)((System.currentTimeMillis() - start) / 500) > msgs) {
-	        	if(hasLog) log.info((int)((double)downloaded / (double)size * 100d) + "%");
-	            msgs++;
-	        }
-	    }
-	    in.close();
-	    out.close();
-	    if(hasLog) log.info("Download finished");
+		if (!file.getParentFile().exists())
+			file.getParentFile().mkdir();
+		if (file.exists())
+			file.delete();
+		file.createNewFile();
+		final int size = url.openConnection().getContentLength();
+		if(hasLog) log.info("Downloading " + file.getName() + " (" + size / 1024 + "kb) ...");
+		final InputStream in = url.openStream();
+		final OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+		final byte[] buffer = new byte[1024];
+		int len, downloaded = 0, msgs = 0;
+		final long start = System.currentTimeMillis();
+		while ((len = in.read(buffer)) >= 0) {
+			out.write(buffer, 0, len);
+			downloaded += len;
+			if ((int)((System.currentTimeMillis() - start) / 500) > msgs) {
+				if(hasLog) log.info((int)((double)downloaded / (double)size * 100d) + "%");
+				msgs++;
+			}
+		}
+		in.close();
+		out.close();
+		if(hasLog) log.info("Download finished");
 	}
 
 	/**

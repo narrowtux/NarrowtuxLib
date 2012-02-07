@@ -136,7 +136,7 @@ public class FileUtils {
 		byte[] buffer = new byte[4096];
 		int length;
 		while (is!=null&&(length = is.read(buffer)) > 0) {
-		    os.write(buffer, 0, length);
+			os.write(buffer, 0, length);
 		}
 		os.close();
 		is.close();

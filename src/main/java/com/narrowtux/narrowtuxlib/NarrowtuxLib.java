@@ -65,18 +65,18 @@ public class NarrowtuxLib extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		//Attempt to auto update if file is available
-        try {
-            File directory = new File(Bukkit.getServer().getUpdateFolder());
-            if (directory.exists()) {
-                File plugin = new File(directory.getPath(), "NarrowtuxLib.jar");
-                if (plugin.exists()) {
-                    FileUtil.copy(plugin, this.getFile());
-                    plugin.delete();
-                }
-            }
-        }
-        catch (Exception e) {}
-        save();
+		try {
+			File directory = new File(Bukkit.getServer().getUpdateFolder());
+			if (directory.exists()) {
+				File plugin = new File(directory.getPath(), "NarrowtuxLib.jar");
+				if (plugin.exists()) {
+					FileUtil.copy(plugin, this.getFile());
+					plugin.delete();
+				}
+			}
+		}
+		catch (Exception e) {}
+		save();
 		sendDescription("disabled");
 	}
 
@@ -90,10 +90,10 @@ public class NarrowtuxLib extends JavaPlugin {
 		load();
 		if(config.isAutoUpdate()){
 			(new Thread() {
-	            public void run() {
-	                update();
-	            }
-	        }).start();
+				public void run() {
+					update();
+				}
+			}).start();
 		}
 		if(isSpoutInstalled()){
 			SpoutManager.getFileManager().addToCache(this, "http://tetragaming.com/narrowtux/pluginres/narrowtuxlib/messageBoxBG.png");
@@ -194,27 +194,27 @@ public class NarrowtuxLib extends JavaPlugin {
 	}
 
 	protected void update() {
-        if (!isUpdateAvailable()) {
-            return;
-        }
-        try {
-            File directory = new File(Bukkit.getServer().getUpdateFolder());
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-            File plugin = new File(directory.getPath(), "NarrowtuxLib.jar");
-            if (!plugin.exists()) {
-                URL bukkitContrib = new URL("http://tetragaming.com/narrowtux/plugins/NarrowtuxLib.jar");
-                HttpURLConnection con = (HttpURLConnection)(bukkitContrib.openConnection());
-                System.setProperty("http.agent", ""); //Spoofing the user agent is required to track stats
-                con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
-                ReadableByteChannel rbc = Channels.newChannel(con.getInputStream());
-                FileOutputStream fos = new FileOutputStream(plugin);
-                fos.getChannel().transferFrom(rbc, 0, 1 << 24);
-            }
-        }
-        catch (Exception e) {}
-    }
+		if (!isUpdateAvailable()) {
+			return;
+		}
+		try {
+			File directory = new File(Bukkit.getServer().getUpdateFolder());
+			if (!directory.exists()) {
+				directory.mkdir();
+			}
+			File plugin = new File(directory.getPath(), "NarrowtuxLib.jar");
+			if (!plugin.exists()) {
+				URL bukkitContrib = new URL("http://tetragaming.com/narrowtux/plugins/NarrowtuxLib.jar");
+				HttpURLConnection con = (HttpURLConnection)(bukkitContrib.openConnection());
+				System.setProperty("http.agent", ""); //Spoofing the user agent is required to track stats
+				con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
+				ReadableByteChannel rbc = Channels.newChannel(con.getInputStream());
+				FileOutputStream fos = new FileOutputStream(plugin);
+				fos.getChannel().transferFrom(rbc, 0, 1 << 24);
+			}
+		}
+		catch (Exception e) {}
+	}
 	/**
 	 *
 	 * @return the notification manager
@@ -306,17 +306,17 @@ public class NarrowtuxLib extends JavaPlugin {
 	public boolean installSpout() {
 		if(config.isInstallSpout()) {
 			final PluginManager pm = getServer().getPluginManager();
-		    if (pm.getPlugin("Spout") == null && config.isInstallSpout()){
-		        try {
-		            NetworkUtils.download(log, new URL("http://ci.getspout.org/view/SpoutDev/job/Spout/promotion/latest/Recommended/artifact/target/spout-dev-SNAPSHOT.jar"), new File("plugins/Spout.jar"));
-		            pm.loadPlugin(new File("plugins" + File.separator + "Spout.jar"));
-		            pm.enablePlugin(pm.getPlugin("Spout"));
-		        } catch (final Exception ex) {
-		            log.warning("[NarrowtuxLib] Failed to install Spout, you may have to restart your server or install it manually.");
-		            return false;
-		        }
-		        return true;
-		    }
+			if (pm.getPlugin("Spout") == null && config.isInstallSpout()){
+				try {
+					NetworkUtils.download(log, new URL("http://ci.getspout.org/view/SpoutDev/job/Spout/promotion/latest/Recommended/artifact/target/spout-dev-SNAPSHOT.jar"), new File("plugins/Spout.jar"));
+					pm.loadPlugin(new File("plugins" + File.separator + "Spout.jar"));
+					pm.enablePlugin(pm.getPlugin("Spout"));
+				} catch (final Exception ex) {
+					log.warning("[NarrowtuxLib] Failed to install Spout, you may have to restart your server or install it manually.");
+					return false;
+				}
+				return true;
+			}
 		}
 		return false;
 	}

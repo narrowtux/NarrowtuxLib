@@ -8,7 +8,7 @@ softdepend: [Spout, Register]
 main: com.narrowtux.narrowtuxlib.NarrowtuxLib
 
 commands:
-  notification:
-    aliases: nt
-    description: View list of notifications or a specific notification ID.
-    usage: /<command> [id]
+    notification:
+        aliases: nt
+        description: View list of notifications or a specific notification ID.
+        usage: /<command> [id]
