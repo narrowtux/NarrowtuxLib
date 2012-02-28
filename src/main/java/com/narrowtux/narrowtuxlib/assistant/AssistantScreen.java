@@ -19,7 +19,6 @@ package com.narrowtux.narrowtuxlib.assistant;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.player.PlayerChatEvent;
-
 import org.getspout.spoutapi.gui.Button;
 import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.GenericLabel;
@@ -27,6 +26,8 @@ import org.getspout.spoutapi.gui.GenericTextField;
 import org.getspout.spoutapi.gui.Label;
 import org.getspout.spoutapi.gui.TextField;
 import org.getspout.spoutapi.gui.Widget;
+
+import com.narrowtux.narrowtuxlib.NarrowtuxLib;
 
 public class AssistantScreen extends GenericWindow {
 	private GuiAssistant assistant;
@@ -48,7 +49,7 @@ public class AssistantScreen extends GenericWindow {
 			pageInput = new GenericTextField();
 			pageInput.setX(getMarginLeft()).setY(getMarginTop()+60).setWidth(getWidth()-20).setHeight(20);
 			pageInput.setMaximumCharacters(100);
-			attachWidget(pageInput);
+			attachWidget(NarrowtuxLib.getInstance(), pageInput);
 		}
 		pageInput.setText("");
 		pageInput.setDirty(true);
@@ -57,14 +58,14 @@ public class AssistantScreen extends GenericWindow {
 		{
 			button = new GenericButton("Send");
 			button.setX(getMarginLeft()).setY(getMarginBottom()-10).setWidth(200).setHeight(20);
-			attachWidget(button);
+			attachWidget(NarrowtuxLib.getInstance(), button);
 		}
 	}
 
 	private Label createLabel(String text, int x, int y, int width, int height){
 		Label lbl = new GenericLabel(text);
 		lbl.setX(x).setY(y).setWidth(width).setHeight(height);
-		attachWidget(lbl);
+		attachWidget(NarrowtuxLib.getInstance(), lbl);
 		return lbl;
 	}
 
@@ -95,7 +96,7 @@ public class AssistantScreen extends GenericWindow {
 	public void attachMessageBox(MessageBox msg) {
 		currentMsg = msg;
 		for(Widget w:msg.getAttachedWidgets()){
-			attachWidget(w);
+			attachWidget(NarrowtuxLib.getInstance(), w);
 		}
 	}
 

@@ -1,9 +1,10 @@
 package com.nijikokun.register.narrowtuxlib.payment.methods;
 
-import com.nijikokun.register.narrowtuxlib.payment.Method;
-
 import me.ic3d.eco.ECO;
+
 import org.bukkit.plugin.Plugin;
+
+import com.nijikokun.register.narrowtuxlib.payment.Method;
 
 /**
  * 3co implementation of Method.

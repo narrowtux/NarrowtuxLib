@@ -18,7 +18,6 @@
 package com.narrowtux.narrowtuxlib.assistant;
 
 import org.bukkit.ChatColor;
-
 import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;

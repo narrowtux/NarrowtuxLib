@@ -1,10 +1,10 @@
 package com.nijikokun.register.narrowtuxlib.payment;
 
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 
 /**
  * The <code>Methods</code> initializes Methods that utilize the Method interface

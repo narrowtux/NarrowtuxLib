@@ -17,21 +17,20 @@
 
 package com.narrowtux.narrowtuxlib.event;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.getspout.spoutapi.event.screen.ButtonClickEvent;
 import org.getspout.spoutapi.event.screen.ScreenCloseEvent;
-import org.getspout.spoutapi.event.screen.ScreenListener;
-import org.getspout.spoutapi.event.screen.SliderDragEvent;
-import org.getspout.spoutapi.event.screen.TextFieldChangeEvent;
 import org.getspout.spoutapi.gui.Screen;
 
-import com.narrowtux.narrowtuxlib.gui.Clickable;
-import com.narrowtux.narrowtuxlib.gui.GenericCheckBox;
 import com.narrowtux.narrowtuxlib.assistant.AssistantScreen;
 import com.narrowtux.narrowtuxlib.assistant.MessageBox;
+import com.narrowtux.narrowtuxlib.gui.Clickable;
+import com.narrowtux.narrowtuxlib.gui.GenericCheckBox;
 
-public class NTScreenListener extends ScreenListener {
+public class NTScreenListener implements Listener {
 
-	@Override
+	@EventHandler
 	public void onButtonClick(ButtonClickEvent event) {
 		Screen screen = event.getScreen();
 		if(screen instanceof AssistantScreen){
@@ -54,7 +53,7 @@ public class NTScreenListener extends ScreenListener {
 		}
 	}
 
-	@Override
+	@EventHandler
 	public void onScreenClose(ScreenCloseEvent event) {
 		Screen screen = event.getScreen();
 		if(screen instanceof AssistantScreen){
@@ -63,9 +62,5 @@ public class NTScreenListener extends ScreenListener {
 				ascreen.getAssistant().cancel();
 			}
 		}
-	}
-
-	@Override
-	public void onTextFieldChange(TextFieldChangeEvent event) {
 	}
 }

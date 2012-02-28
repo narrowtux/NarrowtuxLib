@@ -2,7 +2,6 @@ package com.narrowtux.narrowtuxlib.gui;
 
 import org.getspout.spoutapi.gui.Button;
 import org.getspout.spoutapi.gui.GenericButton;
-import org.getspout.spoutapi.gui.Label;
 
 public class GenericCheckBox extends GenericButton {
 	private boolean checked = false;

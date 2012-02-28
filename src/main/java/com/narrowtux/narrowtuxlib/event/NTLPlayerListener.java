@@ -17,6 +17,9 @@
 
 package com.narrowtux.narrowtuxlib.event;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -25,21 +28,21 @@ import com.narrowtux.narrowtuxlib.NarrowtuxLib;
 import com.narrowtux.narrowtuxlib.assistant.Assistant;
 import com.narrowtux.narrowtuxlib.notification.SimpleNotificationManager;
 
-public class NTLPlayerListener extends org.bukkit.event.player.PlayerListener {
-	@Override
+public class NTLPlayerListener implements Listener {
+	@EventHandler(priority=EventPriority.LOWEST)
 	public void onPlayerChat(PlayerChatEvent event){
 		//Cool, not?
 		Assistant.onPlayerChat(event);
 	}
 
-	@Override
+	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
 		try{
 			Assistant.onPlayerMove(event);
 		}catch(NoClassDefFoundError e){}
 	}
 
-	@Override
+	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event){
 		((SimpleNotificationManager)NarrowtuxLib.getNotificationManager()).handleJoinEvent(event);
 	}

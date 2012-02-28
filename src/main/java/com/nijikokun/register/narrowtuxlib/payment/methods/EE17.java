@@ -1,10 +1,10 @@
 package com.nijikokun.register.narrowtuxlib.payment.methods;
 
-import com.nijikokun.register.narrowtuxlib.payment.Method;
+import org.bukkit.plugin.Plugin;
+
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.api.Economy;
-
-import org.bukkit.plugin.Plugin;
+import com.nijikokun.register.narrowtuxlib.payment.Method;
 
 /**
  * Essentials 17 Implementation of Method

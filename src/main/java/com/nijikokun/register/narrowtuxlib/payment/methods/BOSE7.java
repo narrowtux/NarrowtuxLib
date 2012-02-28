@@ -1,9 +1,10 @@
 package com.nijikokun.register.narrowtuxlib.payment.methods;
 
+import org.bukkit.plugin.Plugin;
+
 import com.nijikokun.register.narrowtuxlib.payment.Method;
 
 import cosine.boseconomy.BOSEconomy;
-import org.bukkit.plugin.Plugin;
 
 /**
  * BOSEconomy 7 Implementation of Method

@@ -33,10 +33,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event.Priority;
-import org.bukkit.event.Event.Type;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -86,7 +82,6 @@ public class NarrowtuxLib extends JavaPlugin {
 		info = getDescription();
 		createDataFolder();
 		config = new Configuration(new File(getDataFolder(), "narrowtuxlib.cfg"));
-		final PluginManager pm = getServer().getPluginManager();
 		load();
 		if(config.isAutoUpdate()){
 			(new Thread() {
@@ -123,23 +118,12 @@ public class NarrowtuxLib extends JavaPlugin {
 	}
 
 	private void registerEvents() {
-		registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Lowest);
-		registerEvent(Type.PLAYER_MOVE, playerListener);
-		registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Highest);
-		registerEvent(Type.PLUGIN_ENABLE, serverListener, Priority.Normal);
-		registerEvent(Type.PLUGIN_DISABLE, serverListener, Priority.Normal);
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(playerListener, this);
+		pm.registerEvents(serverListener, this);
 		if(isSpoutInstalled()){
-			registerEvent(Type.CUSTOM_EVENT, new NTScreenListener());
+			pm.registerEvents(new NTScreenListener(), this);
 		}
-	}
-
-	private void registerEvent(Type type, Listener listener, Priority priority){
-		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(type, listener, priority, this);
-	}
-
-	private void registerEvent(Type type, Listener listener){
-		registerEvent(type, listener, Priority.Normal);
 	}
 
 	private void sendDescription(String startup){
@@ -152,12 +136,6 @@ public class NarrowtuxLib extends JavaPlugin {
 			authors+=name;
 		}
 		log.log(Level.INFO, "["+pdf.getName()+"] v"+pdf.getVersion()+" by ["+authors+"] "+startup+".");
-	}
-	/**
-	 * @return the logger
-	 */
-	public static Logger getLogger(){
-		return log;
 	}
 
 	protected boolean isUpdateAvailable() {

@@ -1,14 +1,13 @@
 package com.nijikokun.register.narrowtuxlib.payment.methods;
 
-import com.nijikokun.register.narrowtuxlib.payment.Method;
+import org.bukkit.plugin.Plugin;
+
 import com.iConomy.iConomy;
 import com.iConomy.system.Account;
 import com.iConomy.system.BankAccount;
 import com.iConomy.system.Holdings;
 import com.iConomy.util.Constants;
-
-
-import org.bukkit.plugin.Plugin;
+import com.nijikokun.register.narrowtuxlib.payment.Method;
 
 /**
  * iConomy 5 Implementation of Method

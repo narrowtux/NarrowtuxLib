@@ -1,11 +1,11 @@
 package com.nijikokun.register.narrowtuxlib.payment.methods;
 
-import com.nijikokun.register.narrowtuxlib.payment.Method;
-
 import me.ashtheking.currency.Currency;
 import me.ashtheking.currency.CurrencyList;
 
 import org.bukkit.plugin.Plugin;
+
+import com.nijikokun.register.narrowtuxlib.payment.Method;
 
 /**
  * MultiCurrency Method implementation.

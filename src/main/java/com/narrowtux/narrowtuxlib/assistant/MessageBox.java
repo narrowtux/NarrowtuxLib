@@ -18,7 +18,6 @@
 package com.narrowtux.narrowtuxlib.assistant;
 
 import org.bukkit.ChatColor;
-
 import org.getspout.spoutapi.gui.Button;
 import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.GenericLabel;
@@ -26,6 +25,8 @@ import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.Label;
 import org.getspout.spoutapi.gui.Texture;
 import org.getspout.spoutapi.player.SpoutPlayer;
+
+import com.narrowtux.narrowtuxlib.NarrowtuxLib;
 
 public class MessageBox extends GenericWindow {
 	private String text = "";
@@ -45,17 +46,17 @@ public class MessageBox extends GenericWindow {
 		//Button
 		okButton = new GenericButton("OK");
 		okButton.setWidth(100).setHeight(20).setX(getMarginLeft()+(getWidth()-100)/2).setY(getMarginBottom()-10);
-		attachWidget(okButton);
+		attachWidget(NarrowtuxLib.getInstance(), okButton);
 
 		//Icon
 		iconTexture = new GenericTexture(icon.getUrl());
 		iconTexture.setWidth(32).setHeight(32).setX(getMarginLeft()).setY(getMarginTop()+10+30-16);
-		attachWidget(iconTexture);
+		attachWidget(NarrowtuxLib.getInstance(), iconTexture);
 
 		//Text
 		textLabel = new GenericLabel(text);
 		textLabel.setWidth(380-42).setHeight(20).setX(getMarginLeft()+42).setY(iconTexture.getY()+16);
-		attachWidget(textLabel);
+		attachWidget(NarrowtuxLib.getInstance(), textLabel);
 	}
 	public String getText() {
 		return text;
